@@ -22,7 +22,7 @@ class CustomerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3',
-            'phone' => 'required|integer',
+            'phone' => 'required',
             'address' => 'required',
         ]);
         $allData = $request->all();
@@ -41,7 +41,7 @@ class CustomerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3',
-            'phone' => 'required|integer',
+            'phone' => 'required',
             'address' => 'required',
         ]);
 
