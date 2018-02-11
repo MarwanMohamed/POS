@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">كود الصنف</label>
+                    <label class="col-sm-3 control-label">الكمية</label>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="amount" value="{{old('amount', $item->amount)}}">
                         @if ($errors->has('amount'))
