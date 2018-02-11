@@ -52,49 +52,46 @@
 
 </script>
 <div id="page-title">
-    <a href="{{route('item.create')}}" class="btn btn-primary pull-right">اضافة صنف</a><br>
+    <a href="{{route('customer.create')}}" class="btn btn-primary pull-right">اضافة عميل</a><br>
 </div>
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">الاصناف</h3>
+        <h3 class="title-hero">العملاء</h3>
         <div class="example-box-wrapper">
+
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>كود الصنف</th>
-                        <th>اسم الصنف</th>
-                        <th>الفئة الرئيسية</th>
-                        <th>الكمية</th>
-                        <th>سعر الشراء</th>
-                        <th>سعر البيع</th>
+                        <th>اسم العميل</th>
+                        <th>رقم الهاتف</th>
+                        <th>العنوان</th>
+                        <th>الملاحظات</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($items as $key => $item)
+                    @foreach($customers as $key => $customer)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$item->code}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->category->cat_name}}</td>
-                            <td>{{$item->amount}}</td>
-                            <td>{{$item->buy_price}}</td>
-                            <td>{{$item->sell_price}}</td>
-                        
+                            <td>{{$customer->name}}</td>
+                            <td>{{$customer->phone}}</td>
+                            <td>{{$customer->address}}</td>
+                            <td>{{$customer->note}}</td>
+                           
                            
                             <td>
-                                <a href="{{route('item.edit', $item->id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                <form id="delete_form" action="{{ route('item.destroy', $item->id) }}" method="POST" >
+                                <a href="{{route('customer.edit', $customer->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('customer.destroy', $customer->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
                                 </form>
-                            
+                                
                             </td>
                         </tr>
                     @endforeach

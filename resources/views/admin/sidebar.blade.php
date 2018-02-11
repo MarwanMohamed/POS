@@ -47,11 +47,21 @@
             </div>
         </li>
 
+        <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-user"></i>
+                <span>العملاء</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('customer.index')}}"><span>العملاء</span></a></li>
+                    <li><a href="{{route('customer.create')}}"><span>اضافة عميل</span></a></li>
+                </ul>
+
+            </div>
+        </li>   
        
-
-        
-
-   
     </ul>
 
     </div>
