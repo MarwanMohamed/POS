@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class ItemController extends Controller
 {
     public function index()
     {
@@ -62,5 +61,4 @@ class CategoriesController extends Controller
         $category->delete();
         return redirect()->back()->with('message', 'تم حظف الفئة بنجاح');
     }
-    
 }

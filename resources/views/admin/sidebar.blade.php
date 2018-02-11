@@ -20,13 +20,28 @@
         <li>
             <a href="#" title="Elements">
                 <i class="glyph-icon icon-shopping-cart"></i>
-                <span>الاقسام</span>
+                <span>الفئات</span>
             </a>
             <div class="sidebar-submenu">
 
                 <ul>
-                    <li><a href="{{route('category.index')}}"><span>الاقسام</span></a></li>
-                    <li><a href="{{route('category.create')}}"><span>اضافة قسم</span></a></li>
+                    <li><a href="{{route('category.index')}}"><span>الفئات</span></a></li>
+                    <li><a href="{{route('category.create')}}"><span>اضافة فئة</span></a></li>
+                </ul>
+
+            </div>
+        </li>
+
+         <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-file"></i>
+                <span>الأصناف</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('item.index')}}"><span>الأصناف</span></a></li>
+                    <li><a href="{{route('item.create')}}"><span>اضافة صنف</span></a></li>
                 </ul>
 
             </div>
