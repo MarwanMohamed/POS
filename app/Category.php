@@ -9,7 +9,7 @@ class Category extends Model
 {
     protected $table = 'categories';
     protected $primaryKey = 'cat_id';
-    protected $fillable =  ['cat_image', 'cat_name', 'min_price', 'max_price', 'cat_desc'];
+    protected $fillable =  ['cat_image', 'cat_name'];
 
 
    

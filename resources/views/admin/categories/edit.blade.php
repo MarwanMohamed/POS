@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="form-group{{ $errors->has('cat_name') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">الاسم</label>
+                    <label class="col-sm-3 control-label">اسم الفئة</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="cat_name" value="{{old('cat_name', $category->cat_name)}}">
                         @if ($errors->has('cat_name'))
@@ -37,46 +37,7 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('cat_desc') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">الوصف</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="cat_desc" value="{{old('cat_desc', $category->cat_desc)}}">
-                        @if ($errors->has('cat_desc'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('cat_desc') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
                 
-               
-
-                <div class="form-group{{ $errors->has('min_price') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اقل سعر</label>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" name="min_price" value="{{old('min_price', $category->min_price)}}">@if ($errors->has('min_price'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('min_price') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('max_price') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اعلى سعر</label>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" name="max_price" value="{{old('max_price', $category->max_price)}}">
-                        @if ($errors->has('max_price'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('max_price') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-               
-             
-
                 
                 <button type="submit" class="btn btn-primary">حفظ</button>
             </form>

@@ -64,10 +64,7 @@
                 <thead>
                     <tr>
                         <th>الصورة</th>
-                        <th>الاسم</th>
-                        <th>الوصف</th>
-                        <th>اقل سعر</th>
-                        <th>اعلى سعر</th>
+                        <th>اسم الفئة</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
@@ -79,12 +76,8 @@
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td><img src="{{asset('uploads/'. $category->cat_image)}}" width="120" height="80"></td>
+                            <td>@if($category->cat_image)<img src="{{asset('uploads/'. $category->cat_image)}}" width="120" height="80">@endif</td>
                             <td>{{$category->cat_name}}</td>
-                            <td>{{$category->cat_desc}}</td>
-                            <td>{{$category->min_price}}</td>
-                            <td>{{$category->max_price}}</td>
-                        
                            
                             <td>
                                 <a href="{{route('category.edit', $category->cat_id)}}"><i class="glyph-icon icon-edit"></i></a>

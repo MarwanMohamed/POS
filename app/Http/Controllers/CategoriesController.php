@@ -21,11 +21,8 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cat_image' => 'required|mimes:jpg,jpeg,png',
+            'cat_image' => 'mimes:jpg,jpeg,png',
             'cat_name' => 'required|min:3',
-            'min_price' => 'required|integer',
-            'max_price' => 'required|integer',
-            'cat_desc' => 'required|min:5',
         ]);
         $allData = $request->all();
         Category::create($allData);
@@ -43,9 +40,6 @@ class CategoriesController extends Controller
         $this->validate($request, [
             'cat_image' => 'mimes:jpg,jpeg,png',
             'cat_name' => 'required|min:3',
-            'min_price' => 'required|integer',
-            'max_price' => 'required|integer',
-            'cat_desc' => 'required|min:5',
         ]);
 
         Category::findOrFail($id)->update($request->all());
