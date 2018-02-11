@@ -4,7 +4,7 @@
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">اضافة فئة</h3>
+        <h3 class="title-hero">اضافة صنف</h3>
         <div class="example-box-wrapper">
             <form class="form-horizontal bordered-row" method="post" action="{{route('item.store')}}"  enctype="multipart/form-data">
                 {{csrf_field()}}
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">كود الصنف</label>
+                    <label class="col-sm-3 control-label">الكمية</label>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="amount" value="{{old('amount')}}">
                         @if ($errors->has('amount'))
