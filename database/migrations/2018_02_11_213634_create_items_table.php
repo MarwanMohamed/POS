@@ -18,7 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->integer('category_id')->index()->unsigned();
-            $table->integer('amount');
+            $table->integer('amount')->nullable();
             $table->integer('buy_price')->nullable();
             $table->integer('sell_price')->nullable();
             $table->timestamps();

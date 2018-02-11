@@ -26,7 +26,7 @@ class ItemController extends Controller
             'code' => 'required|integer',
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
-            'amount' => 'required|integer',
+            'amount' => 'integer',
             'buy_price' => 'integer',
             'sell_price' => 'integer',
         ]);
@@ -49,7 +49,7 @@ class ItemController extends Controller
             'code' => 'required|integer',
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
-            'amount' => 'required|integer',
+            'amount' => 'integer',
             'buy_price' => 'integer',
             'sell_price' => 'integer',
         ]);
