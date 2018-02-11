@@ -1,9 +1,9 @@
 @extends('admin.layout')
 @section('content')
 
-    <script type="text/javascript" src="../../assets/widgets/datatable/datatablesar.js"></script>
-    <script type="text/javascript" src="../../assets/widgets/datatable/datatable-bootstrapar.js"></script>
-    <script type="text/javascript" src="../../assets/widgets/datatable/datatable-tabletools.js"></script>
+    <script type="text/javascript" src="{{asset('assets/widgets/datatable/datatablesar.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/widgets/datatable/datatable-bootstrapar.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/widgets/datatable/datatable-tabletools.js')}}"></script>
 
 <script type="text/javascript">
 

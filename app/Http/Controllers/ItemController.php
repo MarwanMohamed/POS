@@ -22,14 +22,28 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'code' => 'required|integer',
+        $rules = [
+            'code' => 'required|integer|unique:items',
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
             'amount' => 'integer',
             'buy_price' => 'integer',
             'sell_price' => 'integer',
-        ]);
+        ];
+        $validator = \Validator::make($request->all(), $rules);
+
+        if ($request->amount < 1) {
+            \Session::flash('error', 'يجب ان يكون الكمية اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+
+        if ($request->sell_price < $request->buy_price) {
+            \Session::flash('errorSell', 'يجب ان يكون سعر البيع اكثر من سعر الشراء');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+
         $allData = $request->all();
         Item::create($allData);
         return redirect()->route('item.index')->with('message', 'تم اضافة الصنف بنجاح');
@@ -45,14 +59,27 @@ class ItemController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'code' => 'required|integer',
+        $rules = [
+            'code' => 'required|integer|unique:items,code,'.$id,
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
             'amount' => 'integer',
             'buy_price' => 'integer',
             'sell_price' => 'integer',
-        ]);
+        ];
+
+        $validator = \Validator::make($request->all(), $rules);
+
+        if ($request->amount < 1) {
+            \Session::flash('error', 'يجب ان يكون الكمية اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+
+        if ($request->sell_price < $request->buy_price) {
+            \Session::flash('errorSell', 'يجب ان يكون سعر البيع اكثر من سعر الشراء');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
         Item::findOrFail($id)->update($request->all());
         return redirect()->back()->with('message', 'تم تعديل الصنف بنجاح');

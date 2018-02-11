@@ -4,7 +4,7 @@
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">اضافة فئة</h3>
+        <h3 class="title-hero">تعديل الصنف</h3>
         <div class="example-box-wrapper">
             <form class="form-horizontal bordered-row" method="post" action="{{route('item.update', $item->id)}}"  enctype="multipart/form-data">
                 {{csrf_field()}}
