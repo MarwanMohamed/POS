@@ -52,43 +52,44 @@
 
 </script>
 <div id="page-title">
-    <a href="{{route('category.create')}}" class="btn btn-primary pull-right">اضافة فئة</a><br>
+    <a href="{{route('item.create')}}" class="btn btn-primary pull-right">اضافة صنف</a><br>
 </div>
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">الفئات</h3>
+        <h3 class="title-hero">الاصناف</h3>
         <div class="example-box-wrapper">
-
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>الصورة</th>
-                        <th>الاسم</th>
-                        <th>الوصف</th>
-                        <th>اقل سعر</th>
-                        <th>اعلى سعر</th>
+                        <th>كود الصنف</th>
+                        <th>اسم الصنف</th>
+                        <th>الفئة الرئيسية</th>
+                        <th>الكمية</th>
+                        <th>سعر الشراء</th>
+                        <th>سعر البيع</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($categories as $key => $category)
+                    @foreach($items as $key => $item)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td><img src="{{asset('uploads/'. $category->cat_image)}}" width="120" height="80"></td>
-                            <td>{{$category->cat_name}}</td>
-                            <td>{{$category->cat_desc}}</td>
-                            <td>{{$category->min_price}}</td>
-                            <td>{{$category->max_price}}</td>
+                            <td>{{$item->code}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->category->cat_name}}</td>
+                            <td>{{$item->amount}}</td>
+                            <td>{{$item->buy_price}}</td>
+                            <td>{{$item->sell_price}}</td>
                         
                            
                             <td>
-                                <a href="{{route('category.edit', $category->cat_id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                 <form id="delete_form" action="{{ route('category.destroy', $category->cat_id) }}" method="POST" >
+                                <a href="{{route('item.edit', $item->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                 <form id="delete_form" action="{{ route('item.destroy', $item->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>

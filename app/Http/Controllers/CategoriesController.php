@@ -60,7 +60,7 @@ class CategoriesController extends Controller
             unlink("uploads/".$category->cat_image);
         
         $category->delete();
-        return redirect()->back()->with('message', 'تم حظف الفئة بنجاح');
+        return redirect()->back()->with('message', 'تم حذف الفئة بنجاح');
     }
     
 }

@@ -6,41 +6,29 @@
     <div class="panel-body">
         <h3 class="title-hero">اضافة فئة</h3>
         <div class="example-box-wrapper">
-            <form class="form-horizontal bordered-row" method="post" action="{{route('category.store')}}"  enctype="multipart/form-data">
+            <form class="form-horizontal bordered-row" method="post" action="{{route('item.store')}}"  enctype="multipart/form-data">
                 {{csrf_field()}}
-                
-                <div class="form-group{{ $errors->has('cat_image') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">الصورة</label>
+
+
+                <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">كود الصنف</label>
                     <div class="col-sm-6">
-                        <input type="file" class="form-control" name="cat_image" value="{{old('cat_image')}}">
-                        @if ($errors->has('cat_image'))
+                        <input type="number" class="form-control" name="code" value="{{old('code')}}">
+                        @if ($errors->has('code'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('cat_image') }}</strong>
+                                <strong>{{ $errors->first('code') }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
-
-                <div class="form-group{{ $errors->has('cat_name') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">الاسم</label>
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">اسم الصنف</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="cat_name" value="{{old('cat_name')}}">
-                        @if ($errors->has('cat_name'))
+                        <input type="text" class="form-control" name="name" value="{{old('name')}}">
+                        @if ($errors->has('name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('cat_name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('cat_desc') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">الوصف</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="cat_desc" value="{{old('cat_desc')}}">
-                        @if ($errors->has('cat_desc'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('cat_desc') }}</strong>
+                                <strong>{{ $errors->first('name') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -48,33 +36,59 @@
                 
                
 
-                <div class="form-group{{ $errors->has('min_price') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اقل سعر</label>
+                <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">الفئة الرئيسية</label>
                     <div class="col-sm-6">
-                        <input type="number" class="form-control" name="min_price" value="{{old('min_price')}}">@if ($errors->has('min_price'))
+                        <select class="form-control single" name="category_id">
+                          @foreach($categories as $category)
+                            <option value="{{$category->cat_id}}">{{$category->cat_name}}</option> 
+                          @endforeach
+                        </select>
+                        @if ($errors->has('category_id'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('min_price') }}</strong>
+                                <strong>{{ $errors->first('category_id') }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('max_price') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اعلى سعر</label>
+                <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">كود الصنف</label>
                     <div class="col-sm-6">
-                        <input type="number" class="form-control" name="max_price" value="{{old('max_price')}}">
-                        @if ($errors->has('max_price'))
+                        <input type="number" class="form-control" name="amount" value="{{old('amount')}}">
+                        @if ($errors->has('amount'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('max_price') }}</strong>
+                                <strong>{{ $errors->first('amount') }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
-               
-             
+                <div class="form-group{{ $errors->has('buy_price') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">سعر الشراء</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" name="buy_price" value="{{old('buy_price')}}">
+                        @if ($errors->has('buy_price'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('buy_price') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
 
-                
+
+                <div class="form-group{{ $errors->has('sell_price') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">سعر البيع</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" name="sell_price" value="{{old('sell_price')}}">
+                        @if ($errors->has('sell_price'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('sell_price') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>

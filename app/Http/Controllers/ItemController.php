@@ -2,63 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'))->withTitle('Categories');
+        $items = Item::all();
+        return view('admin.items.index', compact('items'))->withTitle('Items');
     }
 
     public function create()
     {
-        return view('admin.categories.create')->withTitle('Create Category');
+    	$categories = Category::all();
+        return view('admin.items.create', compact('categories'))->withTitle('Create Item');
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cat_image' => 'required|mimes:jpg,jpeg,png',
-            'cat_name' => 'required|min:3',
-            'min_price' => 'required|integer',
-            'max_price' => 'required|integer',
-            'cat_desc' => 'required|min:5',
+            'code' => 'required|integer',
+            'name' => 'required|min:3',
+            'category_id' => 'required|integer',
+            'amount' => 'required|integer',
+            'buy_price' => 'integer',
+            'sell_price' => 'integer',
         ]);
         $allData = $request->all();
-        Category::create($allData);
-        return redirect()->route('category.index')->with('message', 'تم اضافة الفئة بنجاح');
+        Item::create($allData);
+        return redirect()->route('item.index')->with('message', 'تم اضافة الصنف بنجاح');
     }
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('admin.categories.edit', compact('category'))->withTitle('Edit Category');
+        $item = Item::findOrFail($id);
+    	$categories = Category::all();
+
+        return view('admin.items.edit', compact('item', 'categories'))->withTitle('Edit Item');
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'cat_image' => 'mimes:jpg,jpeg,png',
-            'cat_name' => 'required|min:3',
-            'min_price' => 'required|integer',
-            'max_price' => 'required|integer',
-            'cat_desc' => 'required|min:5',
+            'code' => 'required|integer',
+            'name' => 'required|min:3',
+            'category_id' => 'required|integer',
+            'amount' => 'required|integer',
+            'buy_price' => 'integer',
+            'sell_price' => 'integer',
         ]);
 
-        Category::findOrFail($id)->update($request->all());
-        return redirect()->back()->with('message', 'تم تعديل الفئة بنجاح');
+        Item::findOrFail($id)->update($request->all());
+        return redirect()->back()->with('message', 'تم تعديل الصنف بنجاح');
     }
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-
-        if (file_exists(public_path("/uploads/".$category->cat_image)))
-            unlink("uploads/".$category->cat_image);
-        
-        $category->delete();
-        return redirect()->back()->with('message', 'تم حظف الفئة بنجاح');
+        Item::findOrFail($id)->delete();
+        return redirect()->back()->with('message', 'تم حذف الصنف بنجاح');
     }
 }
