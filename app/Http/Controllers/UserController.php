@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3',
-            'username' => 'required|min:3',
+            'username' => 'Alpha|required|min:3',
             'password' => 'required|string|min:6|confirmed',
             'is_admin' => 'required',
         ]);
