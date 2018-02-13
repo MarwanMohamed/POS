@@ -61,7 +61,21 @@
 
             </div>
         </li>   
-       
+        
+        <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-users"></i>
+                <span>المستخدمين</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('user.index')}}"><span>المستخدمين</span></a></li>
+                    <li><a href="{{route('user.create')}}"><span>اضافة مستخدم</span></a></li>
+                </ul>
+
+            </div>
+        </li>
     </ul>
 
     </div>
