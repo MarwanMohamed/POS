@@ -61,6 +61,21 @@
                 </ul>
 
             </div>
+        </li> 
+
+        <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-file"></i>
+                <span>الفواتير</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('bill.index')}}"><span>الفواتير</span></a></li>
+                    <li><a href="{{route('bill.create')}}"><span>اضافة فاتورة</span></a></li>
+                </ul>
+
+            </div>
         </li>   
 
         <li>

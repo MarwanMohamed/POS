@@ -52,46 +52,50 @@
 
 </script>
 <div id="page-title">
-    <a href="{{route('engineer.create')}}" class="btn btn-primary pull-right">اضافة مهندس</a><br>
+    <a href="{{route('bill.create')}}" class="btn btn-primary">اضافة فاتورة</a>
+    <a href="{{route('engineer.create')}}" class="btn btn-primary">اضافة مهندس</a>
+    <a href="{{route('customer.create')}}" class="btn btn-primary">اضافة عميل</a><br>
 </div>
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">المهندسيين</h3>
+        <h3 class="title-hero">الفواتير</h3>
         <div class="example-box-wrapper">
-
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
                         <th>اسم العميل</th>
-                        <th>رقم الهاتف</th>
-                        <th>النسبة المئوية</th>
-                        <th>عدد الفواتير</th>
+                        <th>نوع الجهاز</th>
+                        <th>العطل</th>
+                        <th>تاريخ استلام الجهاز</th>
+                        <th>تاريخ تسليم الجهاز</th>
+                        <th>اسم المهندس</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($engineers as $key => $engineer)
+                    @foreach($bills as $key => $bill)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$engineer->name}}</td>
-                            <td>{{$engineer->phone}}</td>
-                            <td>{{$engineer->percentage}}%</td>
-                            <td>{{$engineer->bills->count()}}</td>
-                           
+                            <td>{{$bill->customer->name}}</td>
+                            <td>{{$bill->type}}</td>
+                            <td>{{$bill->error}}</td>
+                            <td>{{$bill->in}}</td>
+                            <td>{{$bill->out}}</td>
+                            <td>{{$bill->engineer->name}}</td>
                            
                             <td>
-                                <a href="{{route('engineer.edit', $engineer->id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                <form id="delete_form" action="{{ route('engineer.destroy', $engineer->id) }}" method="POST" >
+                                <a href="{{route('bill.edit', $bill->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('bill.destroy', $bill->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
                                 </form>
-                                
+                            
                             </td>
                         </tr>
                     @endforeach

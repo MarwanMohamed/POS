@@ -10,6 +10,6 @@ class Engineer extends Model
 
     public function bills()
     {
-    	return $this->hasMany(Bills::class);
+    	return $this->hasMany(Bill::class);
     }
 }
