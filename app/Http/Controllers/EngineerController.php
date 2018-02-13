@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class EngineerController extends Controller
 {
-     public function index()
+    public function index()
     {
         $engineers = Engineer::all();
         return view('admin.engineers.index', compact('engineers'))->withTitle('Engineers');

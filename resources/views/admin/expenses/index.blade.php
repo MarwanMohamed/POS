@@ -63,7 +63,7 @@
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>اسم المهندس</th>
+                        <th>اسم العميل</th>
                         <th>رقم الهاتف</th>
                         <th>النسبة المئوية</th>
                         <th>عدد الفواتير</th>

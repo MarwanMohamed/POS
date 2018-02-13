@@ -32,7 +32,7 @@
             </div>
         </li>
 
-         <li>
+        <li>
             <a href="#" title="Elements">
                 <i class="glyph-icon icon-file"></i>
                 <span>الأصناف</span>
@@ -42,6 +42,21 @@
                 <ul>
                     <li><a href="{{route('item.index')}}"><span>الأصناف</span></a></li>
                     <li><a href="{{route('item.create')}}"><span>اضافة صنف</span></a></li>
+                </ul>
+
+            </div>
+        </li>
+
+        <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-file-text-o"></i>
+                <span>المصروفات</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('expense.index')}}"><span>المصروفات</span></a></li>
+                    <li><a href="{{route('expense.create')}}"><span>اضافة مصروف</span></a></li>
                 </ul>
 
             </div>
@@ -65,7 +80,7 @@
 
         <li>
             <a href="#" title="Elements">
-                <i class="glyph-icon icon-file"></i>
+                <i class="glyph-icon icon-pencil"></i>
                 <span>الفواتير</span>
             </a>
             <div class="sidebar-submenu">

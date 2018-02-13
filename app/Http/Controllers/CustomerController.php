@@ -23,7 +23,6 @@ class CustomerController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3',
             'phone' => 'required',
-            'address' => 'required',
         ]);
         Customer::create($request->all());
         return redirect()->route('customer.index')->with('message', 'تم اضافة العميل بنجاح');
@@ -41,7 +40,6 @@ class CustomerController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3',
             'phone' => 'required',
-            'address' => 'required',
         ]);
 
         Customer::findOrFail($id)->update($request->all());

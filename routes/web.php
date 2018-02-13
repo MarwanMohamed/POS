@@ -13,6 +13,8 @@ Route::group([
 	Route::resource('user', 'UserController');
 	Route::resource('engineer', 'EngineerController');
 	Route::resource('bill', 'BillController');
+	Route::resource('expense', 'ExpenseController');
+
 });
 
 Route::get('/home', function () {
