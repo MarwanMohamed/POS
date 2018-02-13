@@ -47,6 +47,22 @@
             </div>
         </li>
 
+
+        <li>
+            <a href="#" title="Elements">
+                <i class="glyph-icon icon-user"></i>
+                <span>مهندسين الصيانة</span>
+            </a>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('engineer.index')}}"><span>مهندسين الصيانة</span></a></li>
+                    <li><a href="{{route('engineer.create')}}"><span>اضافة مهندس</span></a></li>
+                </ul>
+
+            </div>
+        </li>   
+
         <li>
             <a href="#" title="Elements">
                 <i class="glyph-icon icon-user"></i>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-     public function index()
+    public function index()
     {
         $customers = Customer::all();
         return view('admin.customers.index', compact('customers'))->withTitle('Customers');
@@ -25,8 +25,7 @@ class CustomerController extends Controller
             'phone' => 'required',
             'address' => 'required',
         ]);
-        $allData = $request->all();
-        Customer::create($allData);
+        Customer::create($request->all());
         return redirect()->route('customer.index')->with('message', 'تم اضافة العميل بنجاح');
     }
 
