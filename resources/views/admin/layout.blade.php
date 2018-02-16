@@ -558,7 +558,7 @@
         <div class="user-account-btn dropdown">
             <a href="#" title="My Account" class="user-profile clearfix" data-toggle="dropdown">
                 <img width="28" src="{{asset('assets/image-resources/gravatar.jpg')}}" alt="Profile image">
-                <span>{{auth()->user()->name}}</span>
+                <span>{{isset(auth()->user()->name) ? auth()->user()->name : ''}}</span>
                 <i class="glyph-icon icon-angle-down"></i>
             </a>
             <div class="dropdown-menu float-left">
@@ -570,7 +570,7 @@
                         </div>
                         <div class="user-info">
                             <span>
-                                {{auth()->user()->name}}
+                                {{isset(auth()->user()->name) ? auth()->user()->name : ''}}
                                 <i>
 
                                 </i>

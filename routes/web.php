@@ -5,7 +5,7 @@ Route::group([
     'middleware' => ['admin']
 ], function () {
 
-	Route::get('/', 'DashboardController@index')->name('dashboard');
+	// Route::get('/', 'DashboardController@index')->name('dashboard');
 
 	Route::resource('category', 'CategoriesController');
 	Route::resource('item', 'ItemController');
@@ -16,6 +16,12 @@ Route::group([
 	Route::resource('expense', 'ExpenseController');
 
 });
+
+Route::get('/', 'DashboardController@index')->name('dashboard');
+
+// Route::get('/', function () {
+// 	return redirect()->route('dashboard');
+// });
 
 Route::get('/home', function () {
 	return redirect()->route('dashboard');

@@ -15,7 +15,7 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        return view('admin.expenses.create'))->withTitle('Create Expense');
+        return view('admin.expenses.create')->withTitle('Create Expense');
     }
 
     public function store(Request $request)
