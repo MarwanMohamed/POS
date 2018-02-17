@@ -18,7 +18,7 @@ Route::group([
 
 
 });
-	Route::get('/getitems/{id}', 'ItemController@getItems')->name('get.items');
+	Route::get('/getitems', 'ItemController@getItems')->name('get.items');
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
 

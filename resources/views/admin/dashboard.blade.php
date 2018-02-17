@@ -488,7 +488,8 @@
   $('.category').on('click', function() {
     var catId = $(this).find('input').val();
     $.ajax({  
-      url:"/getitems/"+ catId,  
+      url: "{{route('get.items')}}",
+      data: {catId: catId} , 
       method:"get",  
       success:function(response)  
       {      
