@@ -28,6 +28,16 @@ class CustomerController extends Controller
         return redirect()->route('customer.index')->with('message', 'تم اضافة العميل بنجاح');
     }
 
+     public function frontStore(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'phone' => 'required',
+        ]);
+        Customer::create($request->all());
+        return redirect()->back()->with('message', 'تم اضافة العميل بنجاح');
+    }
+
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);

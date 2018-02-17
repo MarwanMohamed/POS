@@ -14,6 +14,12 @@ class ItemController extends Controller
         return view('admin.items.index', compact('items'))->withTitle('Items');
     }
 
+
+    public function getItems(Request $request, $id)
+    {
+        return Item::where('category_id', $id)->get();
+    }
+
     public function create()
     {
     	$categories = Category::all();

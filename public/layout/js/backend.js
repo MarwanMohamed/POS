@@ -843,42 +843,6 @@ $(document).on("click",".dis_cont .search_h ul .bill",function(){
 });
 
 //dashboard.php
-$(document).on('click',".right_side .row_main_cat ul li",function(){
-	   var this_val=$(this).children("input").val();
-
- 
-			var data={main_cat:this_val,do:'ul'}          
-			$.ajax({  
-			url:"check_type.php",  
-			method:"POST",  
-			data:data,  
-			success:function(data)  
-			{      
-                
-				  if(data.length<46){
-
-				 
-						$('.pr_bill .row_sub_cat ').html("<div class='_alert  alert alert-danger'>لايوجد فئات فرعية</div>");
-					
-						$(".pr_bill .row_sub_cat ").fadeIn(1000).delay(100).fadeOut(1000);
-						$('.pr_bill .right_side .define_type_body ').html(" ");
-		   
-                    $('.pr_bill .right_side .product_body').html(" "); 
-				  }else{
-					   
-						$('.pr_bill  .row_sub_cat ').html(data)
-						$(".pr_bill .row_sub_cat").fadeIn(1000);
-					$('.pr_bill .right_side .define_type_body').html(" ");
-		   
-                    $('.pr_bill .right_side .product_body').html(" "); 
-				  }
-			     
-
-			     
-			}  
-
-			});
-});
 
 $(document).on('click',".row_sub_cat .body_sub_cat ul li",function(){
 	   var this_val=$(this).children("input").val();
@@ -1078,8 +1042,18 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
 }) 
 function isFloat(x) { return !!(x % 1); }
 
-$(document).on("keyup",".left_side .items_s table tbody tr   input",function(){
-  
+$(document).on("keyup blur",".left_side .items_s table tbody tr   input",function(e){
+ 
+   // if (e.keyCode=="8") {
+    
+   // 	if ($(this).val().length=="0") {
+   // 		$(this).val(0);
+   // 	}
+   // }
+   console.log($(this).val().trim().length)
+  if ($(this).val().trim().length=="0") {
+   		$(this).val(0);
+   	}
     var all_input_row=$(this).parents('tr').find("input");
     var print_row_class=$(this).parents('tr').attr('id');
     var this_val=$(this).val().trim();
@@ -1127,7 +1101,7 @@ $(document).on("keyup",".left_side .items_s table tbody tr   input",function(){
 			$(".pop_up_alert .upper").fadeIn(100);
 			$(this).val(0)
     	 
-    	}  
+    	} 
    
        
 
@@ -1149,9 +1123,9 @@ $(document).on("keyup",".left_side .items_s table tbody tr   input",function(){
     all_input_row[4].value=total_row;
      $(this).parents('tr').find(".cost_per_unit input").val(0);
 
-
+ 
   }
-
+ 
   $("#print_aaa table tbody #"+print_row_class+" .num_per_unit").text(all_input_row[0].value);
   $("#print_aaa table tbody #"+print_row_class+" .cost_per_unit").text(all_input_row[1].value);
   $("#print_aaa table tbody #"+print_row_class+" .details_num").text(all_input_row[2].value);
@@ -1186,7 +1160,8 @@ $(document).on("click",".left_side .items_s table tbody tr   input",function(){
 //when blur from number per unit
 
 
-$(document).on("keyup",".left_side .items_s table tbody tr .details_num input",function(){
+$(document).on("keyup",".left_side .items_s table tbody tr .details_num input",function(e){
+	 
     var all_input_row=$(this).parents('tr').find("input");
     var this_val=$(this).val().trim();
     var  orignal_numper_num_per_unit=all_input_row[8].value;//all available close unit 
@@ -1241,7 +1216,7 @@ function check(){
 
 	var total_cost=0;
 	for (var i = 0; i<get_sum_of_row.length; i++) {
-	  
+	   console.log(input_num_per_unit)
 	    get_sum_of_row[i].value=(parseFloat(input_num_per_unit[i].value)*parseFloat(input_cost_per_unit[i].value) )+(parseFloat(input_num_per_p[i].value)* parseFloat(input_cost_per_p[i].value))
       total_cost+=parseFloat(get_sum_of_row[i].value);
 	}
@@ -1597,43 +1572,43 @@ $(".pr_bill .left_side .add_user_dash .close_user").click(function(){
 })
 
 
-$(".pr_bill .left_side .supp_edit_form .add_cu_dash").on("click",function(){
-	 var input_form=$(this).parents('form').find('input');
-	 var text_b=$(this).parents('form').find('.text').val();
-	 var name=input_form[0].value;
-	 var mobile=input_form[1].value;
-	 var place=input_form[2].value;
+// $(".pr_bill .left_side .supp_edit_form .add_cu_dash").on("click",function(){
+// 	 var input_form=$(this).parents('form').find('input');
+// 	 var text_b=$(this).parents('form').find('.text').val();
+// 	 var name=input_form[0].value;
+// 	 var mobile=input_form[1].value;
+// 	 var place=input_form[2].value;
 
  
 
-	  var data={name:name,mobile:mobile,place:place,text:text_b}          
-			$.ajax({  
-					url:"check_type.php",  
-					method:"POST",  
-					data:data,  
-					success:function(data)  
-					{        if (data== -1) {
-                               alert_("تحذير","اسم العميل موجود من قبل")
-						  }else{
-							$('.left_side .select_client select ').append(data);
-							$(".left_side .add_user_dash").animate({top: "-10000px"},5);
-							input_form[0].value='';
-							input_form[1].value='';
-							input_form[2].value='';
-							$(this).parents('form').find('.text').val(" ");
-							var name_ti=data.innerHTML;
-					        $('.name_cust_in_bill').html("اسم العميل :"+name)
+// 	  var data={name:name,mobile:mobile,place:place,text:text_b}          
+// 			$.ajax({  
+// 					url:"check_type.php",  
+// 					method:"POST",  
+// 					data:data,  
+// 					success:function(data)  
+// 					{        if (data== -1) {
+//                                alert_("تحذير","اسم العميل موجود من قبل")
+// 						  }else{
+// 							$('.left_side .select_client select ').append(data);
+// 							$(".left_side .add_user_dash").animate({top: "-10000px"},5);
+// 							input_form[0].value='';
+// 							input_form[1].value='';
+// 							input_form[2].value='';
+// 							$(this).parents('form').find('.text').val(" ");
+// 							var name_ti=data.innerHTML;
+// 					        $('.name_cust_in_bill').html("اسم العميل :"+name)
 
-						  }
+// 						  }
 
 
 					     
-					}  
+// 					}  
 
-			});
+// 			});
 
  
-})
+// })
 
  /////////////////////close main popup
  $(document).on("click",".pop_up_alert .upper .content button,.pop_up_alert .upper .content span",function(){
@@ -2360,6 +2335,15 @@ $(document).on("click",".control_manage_staff .remove",function(){
     }
 });
 
+$(".save_customer").on("click",function(){
+
+    var id=$(".select_client .selectpicker").val();
+    var id_shop=$(".select_client .shop_i").val();
+	document.cookie = "default_customer"+id_shop+"="+id+"; expires=Thu, 18 Dec 2022 12:00:00 UTC";
+ 
+ 
+});
+
 $(document).on("click",".alert_not .alert_sh_d_n .close",function(){
  $(this).parents(".alert_sh_d_n").fadeOut(100);
 });
@@ -2388,5 +2372,8 @@ function alert_(m_mes,desc_mes){
 		 
 }
   
+
+});//end of  code
+
+
  
-})
