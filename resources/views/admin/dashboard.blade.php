@@ -508,7 +508,7 @@
             });
         } else {
             $('.ulforitems').html('');
-            $('.ulforitems').append('<div class="_alert alert alert-danger col-xs-12">لا يوجد منتجات من هذا الصنف  </div>');
+            $('.ulforitems').append('<div class="_alert alert alert-danger col-xs-12">لا يوجد منتجات من هذا الصنف </div>');
         }
       }
   });
