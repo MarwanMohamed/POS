@@ -506,6 +506,9 @@
                   // <input type="hidden" value="470"><input type="hidden" value="9.79167">
                   // <input type="hidden" value="77"><input type="hidden" value="48"></div>
             });
+        } else {
+            $('.ulforitems').html('');
+            $('.ulforitems').append('<div class="_alert alert alert-danger col-xs-12">لا يوجد منتجات من هذا الصنف  </div>');
         }
       }
   });
