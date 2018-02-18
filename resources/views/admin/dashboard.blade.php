@@ -308,8 +308,9 @@
      
       <div class="right_side col-xs-12 col-md-6">
             <div  class="search_cus form-group  "> 
-               
-           <input type="text" name="search" placeholder="بحث فى جميع المحلات"> 
+               <form method="get">
+                <input type="text" name="search" placeholder="بحث فى جميع المحلات"> 
+               </form>
            <div class="row_main_cat  ">
                
                       <ul>
@@ -335,6 +336,11 @@
            </div>
            <div class="product_body">
             <ul class="ulforitems">
+              @if(isset($items))
+              @foreach($items as $item)
+              <li class="col-xs-12 col-md-3 t_shop" id="{{$item->id}}"><span class="name_snf">{{$item->name}}</span><br><span>الكمية:<span class="details_num">{{$item->amount}}</span></span><br><div class="inp"><input type="hidden" value="{{$item->id}}"><input type="hidden" value="{{$item->amount}}"><input type="hidden" value="{{$item->sell_price}}"></li>
+              @endforeach
+              @endif
               {{-- <li class="col-xs-12 col-md-3 t_shop" id="main485">
                   <span class="name_snf">صن شاين مفتت</span><br>
                   <span><span class="num_pre_unit">49</span>(كرتونة)</span><br>
@@ -472,17 +478,7 @@
 }
 };
 }
-// function get_req(data_){
-//     var z=$.ajax({  
-//         {{-- url: "{{route('get.items')}}",   --}}
-//         method:"get",  
-//         data:data_,  
-//         async: false
-//     });
-//     return z;
-    
-// }
-// 
+
 </script>
 
 <script>
