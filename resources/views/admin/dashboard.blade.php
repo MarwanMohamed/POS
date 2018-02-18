@@ -171,8 +171,8 @@
                </div>
                <div class="col-xs-8">اختيار العميل</div>
           </div>
-        <form  id='form_bill' action="" method="POST">
-
+        <form   action="{{route('saveOrder.front')}}" method="POST">
+              {{csrf_field()}}
                <div class="col-xs-12 select_client">
 
               
@@ -190,7 +190,7 @@
                         <option value="0" selected >اختار</option>
 
                           @foreach($customers as $customer)
-                            <option data-tokens="dd" selected value="xx">{{$customer->name}}</option>
+                            <option data-tokens="dd" selected value="{{$customer->id}}">{{$customer->name}}</option>
                           @endforeach                         
 
                          </select>
@@ -248,8 +248,9 @@
           <input type="submit" class="btn btn-info form-control print_bill_bill" name="submit" value="طباعة">
             <div  id='print_aaa' class="col-xs-12 print_aaa" > 
              <div style="border:1px solid #000; padding:5px;overflow: hidden;text-align:center; " class=" ">
-                    <h4 style="float:left;"></h4><br>
-                     <h4 class="name_cust_in_bill">  </h4>
+                    {{-- <h4 style="float:right;">#</h4> --}}
+                    <h4 style="float:left;">{{date("Y-m-d")}}</h4><br>
+                     <h4 class="name_cust_in_bill">   </h4>
               <table  width="100%"    border="1" dir="rtl" style="border-collapse:collapse;" >
                 <thead>
                     <tr>
@@ -285,17 +286,17 @@
                                        <span></span>
                                    </div>
                                  <div><input type="hidden" name="rand_pa" value=""></div>
-                                  <div style="border: 1px solid;text-align:right;direction:ltr;" class="">
+                                 {{--  <div style="border: 1px solid;text-align:right;direction:ltr;" class="">
                                    
                                        <span> </span>
 
                                          <label>:محل</label>
-                                   </div>
-                                    <div style="border: 1px solid;text-align:right;direction:ltr;" >
+                                   </div> --}}
+                                    {{-- <div style="border: 1px solid;text-align:right;direction:ltr;" >
                                      
                                        <span> </span>
                                        <label>:الكاشير</label>
-                                   </div>
+                                   </div> --}}
 
                         </div>
                </div>
@@ -498,14 +499,9 @@
 
             // $('.new_area_select').last().append('<option value="">{{trans('areas.country')}}</option>');
             $.each(response, function(key, val){
-              console.log(val);
-                $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="main485"><span class="name_snf">'+val['name']+'</span><br><span>الكمية:<span class="details_num">'+val['amount']+'</span></span><br></li>');
-                  // <span>سعر  كرتونة :<span class="details_num">470</span></span><br>
-                  // <span>سعر القطعة:<span class="num_per_det">9.79</span></span><br>
-                  // <div class="inp"><input type="hidden" value="485">
-                  // <input type="hidden" value="49"><input type="hidden" value="30">
-                  // <input type="hidden" value="470"><input type="hidden" value="9.79167">
-                  // <input type="hidden" value="77"><input type="hidden" value="48"></div>
+
+                $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية:<span class="details_num">'+val['amount']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+                  
             });
         } else {
             $('.ulforitems').html('');

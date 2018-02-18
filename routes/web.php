@@ -16,11 +16,14 @@ Route::group([
 	Route::resource('bill', 'BillController');
 	Route::resource('expense', 'ExpenseController');
 
+	Route::post('order/store', 'OrderController@frontStoreOrder')->name('saveOrder.front');
 
 });
 	Route::get('/getitems', 'ItemController@getItems')->name('get.items');
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
+
+
 
 // Route::get('/', function () {
 // 	return redirect()->route('dashboard');

@@ -843,6 +843,42 @@ $(document).on("click",".dis_cont .search_h ul .bill",function(){
 });
 
 //dashboard.php
+$(document).on('click',".right_side .row_main_cat ul li",function(){
+	   var this_val=$(this).children("input").val();
+
+ 
+			var data={main_cat:this_val,do:'ul'}          
+			$.ajax({  
+			url:"check_type.php",  
+			method:"POST",  
+			data:data,  
+			success:function(data)  
+			{      
+                
+				  if(data.length<46){
+
+				 
+						$('.pr_bill .row_sub_cat ').html("<div class='_alert  alert alert-danger'>لايوجد فئات فرعية</div>");
+					
+						$(".pr_bill .row_sub_cat ").fadeIn(1000).delay(100).fadeOut(1000);
+						$('.pr_bill .right_side .define_type_body ').html(" ");
+		   
+                    $('.pr_bill .right_side .product_body').html(" "); 
+				  }else{
+					   
+						$('.pr_bill  .row_sub_cat ').html(data)
+						$(".pr_bill .row_sub_cat").fadeIn(1000);
+					$('.pr_bill .right_side .define_type_body').html(" ");
+		   
+                    $('.pr_bill .right_side .product_body').html(" "); 
+				  }
+			     
+
+			     
+			}  
+
+			});
+});
 
 $(document).on('click',".row_sub_cat .body_sub_cat ul li",function(){
 	   var this_val=$(this).children("input").val();
@@ -943,7 +979,7 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
     var this_id=$(this).attr('id');
 
 
-
+    // console.log($(this).html(), this_id);
  
 
 	// for (var i = 0; i<get_sum_of_row_details_num.length; i++) {
@@ -990,22 +1026,22 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
     append_+='<td class="name">'+name_snf+'</td>';
     append_+='<td class="num_per_unit"><input type="text" name="num_per_unit[]" value="0"></td>';
     append_+='<td class="cost_per_unit"><input type="text" name="cost_per_unit[]" value="0" disabled=""></td>';
-    append_+='<td class="details_num"><input type="text" name="details_num[]" value="0"></td>';
-    append_+='<td class="cost_details_num  "><input type="text" name="cost_details_num[]" value="0" disabled=""></td>';
+    // append_+='<td class="details_num"><input type="text" name="details_num[]" value="0"></td>';
+    // append_+='<td class="cost_details_num  "><input type="text" name="cost_details_num[]" value="0" disabled=""></td>';
     append_+='<td><input type="text" name="t_cost_per_one[]" value="0"></td>';
 	append_+='<td><span class="delete_row glyphicon glyphicon-remove"></span></td>';
 	append_+='<td class="d_n">';
-	append_+='<input type="text" name="define_type[]" value="'+all_input[5].value+'">';
+	// append_+='<input type="text" name="define_type[]" value="'+all_input[5].value+'">';
 
 	append_+='<input type="text" name="cost_per_unit1[]" disabled=" ">';
 	append_+='<input type="text" name="shop_id"  ></td>';
 	append_+='<td class="d_n check">';
 	append_+='<input type="hidden" class="num_per_unt" value="'+all_input[1].value+'" disabled="">';
 	append_+='<input type="hidden" class="mian_details_num" value="'+all_input[2].value+'" > ';
-	append_+='<input type="hidden" class="cost_per_unit" value="'+all_input[3].value+'" disabled=""> ';
-	append_+='<input type="hidden" class="cost_per_details_unit" value="'+all_input[4].value+'"disabled="">';
+	// append_+='<input type="hidden" class="cost_per_unit" value="'+all_input[3].value+'" disabled=""> ';
+	// append_+='<input type="hidden" class="cost_per_details_unit" value="'+all_input[4].value+'"disabled="">';
 	append_+='<input type="text" name="id_un[]" value="'+all_input[0].value+'">';///////////////////////////////////////////
-	append_+='<input type="text"  value="'+all_input[6].value+'" disabled=" ">';
+	// append_+='<input type="text"  value="'+all_input[6].value+'" disabled=" ">';
 	append_+='<input type="text" name="user_saler" value="1" ></td> </tr>';
 
     $(".left_side .items_s table tbody").append(append_);
@@ -1017,8 +1053,8 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
     append_2+='<td class="num_per_unit"></td>';
     append_2+='<td class="cost_per_unit"></td>';
     append_2+='<td class="details_num"></td>';
-    append_2+='<td class="cost_details_num  "></td>';
-    append_2+='<td class="to_c"></td>';
+    // append_2+='<td class="cost_details_num  "></td>';
+    // append_2+='<td class="to_c"></td>';
  
 	 
 
@@ -1050,33 +1086,33 @@ $(document).on("keyup blur",".left_side .items_s table tbody tr   input",functio
    // 		$(this).val(0);
    // 	}
    // }
-   console.log($(this).val().trim().length)
   if ($(this).val().trim().length=="0") {
    		$(this).val(0);
    	}
     var all_input_row=$(this).parents('tr').find("input");
     var print_row_class=$(this).parents('tr').attr('id');
     var this_val=$(this).val().trim();
-   
+
+
     var input_per_p=all_input_row[2].value.trim();
     var num_per_unit_first_input=$(".left_side .items_s table tbody tr .num_per_unit input").val();
     var num_per_pieces_third_input=$(".left_side .items_s table tbody tr .details_num  input").val();
  
     var  orignal_numper_num_per_unit=all_input_row[8].value;//all available close unit 
-    var  orignal_numper_num_per_pieces=all_input_row[9].value;// available open pieces 
+    // var  orignal_numper_num_per_pieces=all_input_row[9].value;// available open pieces 
      
-    var  orignal_numper_num_detalis=all_input_row[13].value;//the orignal details number from define type t
+    // var  orignal_numper_num_detalis=all_input_row[13].value;//the orignal details number from define type t
     
 
-    var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
-    var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
+    // var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
+    // var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
 
-    var get_allpieces_in_row=(parseFloat(all_input_row[0].value)*parseFloat(orignal_numper_num_detalis))+parseFloat(input_per_p);
+    var get_allpieces_in_row=parseFloat(all_input_row[0].value)+parseFloat(input_per_p);
     
-    var get_avaliable_detalis_num=(orignal_numper_num_per_unit*orignal_numper_num_detalis)+parseFloat(orignal_numper_num_per_pieces);
+    var get_avaliable_detalis_num=(orignal_numper_num_per_unit);
  
-    var get_the_unit_and_pieces=mode_(get_allpieces_in_row,orignal_numper_num_detalis);
-    var change_func_to_pieces=(get_the_unit_and_pieces[0]*parseFloat(orignal_numper_num_detalis))+parseFloat(get_the_unit_and_pieces[1]);
+    var get_the_unit_and_pieces=mode_(get_allpieces_in_row);
+    var change_func_to_pieces=get_the_unit_and_pieces[0]+parseFloat(get_the_unit_and_pieces[1]);
 
    if (this_val.length>0) {
 
@@ -1129,8 +1165,8 @@ $(document).on("keyup blur",".left_side .items_s table tbody tr   input",functio
   $("#print_aaa table tbody #"+print_row_class+" .num_per_unit").text(all_input_row[0].value);
   $("#print_aaa table tbody #"+print_row_class+" .cost_per_unit").text(all_input_row[1].value);
   $("#print_aaa table tbody #"+print_row_class+" .details_num").text(all_input_row[2].value);
-  $("#print_aaa table tbody #"+print_row_class+" .cost_details_num  ").text(all_input_row[3].value);
-  $("#print_aaa table tbody #"+print_row_class+" .to_c  ").text(total_row);
+  // $("#print_aaa table tbody #"+print_row_class+" .cost_details_num  ").text(all_input_row[3].value);
+  // $("#print_aaa table tbody #"+print_row_class+" .to_c  ").text(total_row);
 
 
  
@@ -1210,14 +1246,13 @@ function check(){
 
 	var input_num_per_unit=$(".left_side .items_s table tbody tr .num_per_unit input");
 	var input_cost_per_unit=$(".left_side .items_s table tbody tr .cost_per_unit input");
-	var input_num_per_p=$(".left_side .items_s table tbody tr .details_num input");
-	var input_cost_per_p=$(".left_side .items_s table tbody tr .cost_details_num input");
+	// var input_num_per_p=$(".left_side .items_s table tbody tr .details_num input");
+	// var input_cost_per_p=$(".left_side .items_s table tbody tr .cost_details_num input");
 	var get_sum_of_row=$(".left_side .items_s table tbody tr input[name='t_cost_per_one[]']");
 
 	var total_cost=0;
 	for (var i = 0; i<get_sum_of_row.length; i++) {
-	   console.log(input_num_per_unit)
-	    get_sum_of_row[i].value=(parseFloat(input_num_per_unit[i].value)*parseFloat(input_cost_per_unit[i].value) )+(parseFloat(input_num_per_p[i].value)* parseFloat(input_cost_per_p[i].value))
+	    get_sum_of_row[i].value=(parseFloat(input_num_per_unit[i].value)*parseFloat(input_cost_per_unit[i].value) )
       total_cost+=parseFloat(get_sum_of_row[i].value);
 	}
 	
@@ -1241,9 +1276,9 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_per_unit i
 		var  user_input_num_per_unit=all_input_row[0].value;
 		var  user_input_num_detalis=all_input_row[1].value;
 		var  orignal_numper_num_per_unit=all_input_row[8].value;//to checks3r el krtona
-		var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
-		var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
-		var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
+		// var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
+		// var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
+		// var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
         
         if (this_val.length>0) {
 				if (e.type=="keyup") {
@@ -1256,13 +1291,13 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_per_unit i
 					}	
 				}else{
 
-					if ( ( parseFloat(all_input_row[10].value)* parseFloat(all_input_row[0].value) ) > (parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )   ) {
+					if ( parseFloat(all_input_row[0].value)  > (parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) ))  {
 
 					$(".pop_up_alert .upper .content h3").html("سعر الوحدة");
 					$(".pop_up_alert .upper .content p").html("سعر الوحدة قليل");
 					$(".pop_up_alert ").fadeIn(100);
 					$(".pop_up_alert .upper").fadeIn(100);
-					$(this).val(parseFloat(all_input_row[10].value))
+					// $(this).val(parseFloat(all_input_row[10].value))
 					all_input_row[4].value=(parseFloat(all_input_row[2].value)* parseFloat(all_input_row[3].value) )+(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
 					
 					}else{
@@ -1291,9 +1326,9 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_details_nu
     var  user_input_num_per_unit=all_input_row[0].value;
     var  user_input_num_detalis=all_input_row[1].value;
     var  orignal_numper_num_per_unit=all_input_row[8].value;//to checks3r el krtona
-    var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
-    var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
-    var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
+    // var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
+    // var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
+    // var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
     if (this_val.length>0) {
 	    	 if (e.type=="keyup") {
 
@@ -1354,9 +1389,9 @@ $(document).on("blur",".left_side .items_s table tbody tr .num_per_unit input",f
     var  user_input_num_per_unit=all_input_row[0].value;
     var  user_input_num_detalis=all_input_row[1].value;
     var  orignal_numper_num_per_unit=all_input_row[8].value;//to checks3r el krtona
-    var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
-    var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
-    var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
+    // var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
+    // var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
+    // var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
 
 
  if (parseFloat(all_input_row[0].value )==orignal_numper_num_per_unit) {
@@ -1572,43 +1607,43 @@ $(".pr_bill .left_side .add_user_dash .close_user").click(function(){
 })
 
 
-// $(".pr_bill .left_side .supp_edit_form .add_cu_dash").on("click",function(){
-// 	 var input_form=$(this).parents('form').find('input');
-// 	 var text_b=$(this).parents('form').find('.text').val();
-// 	 var name=input_form[0].value;
-// 	 var mobile=input_form[1].value;
-// 	 var place=input_form[2].value;
+$(".pr_bill .left_side .supp_edit_form .add_cu_dash").on("click",function(){
+	 var input_form=$(this).parents('form').find('input');
+	 var text_b=$(this).parents('form').find('.text').val();
+	 var name=input_form[0].value;
+	 var mobile=input_form[1].value;
+	 var place=input_form[2].value;
 
  
 
-// 	  var data={name:name,mobile:mobile,place:place,text:text_b}          
-// 			$.ajax({  
-// 					url:"check_type.php",  
-// 					method:"POST",  
-// 					data:data,  
-// 					success:function(data)  
-// 					{        if (data== -1) {
-//                                alert_("تحذير","اسم العميل موجود من قبل")
-// 						  }else{
-// 							$('.left_side .select_client select ').append(data);
-// 							$(".left_side .add_user_dash").animate({top: "-10000px"},5);
-// 							input_form[0].value='';
-// 							input_form[1].value='';
-// 							input_form[2].value='';
-// 							$(this).parents('form').find('.text').val(" ");
-// 							var name_ti=data.innerHTML;
-// 					        $('.name_cust_in_bill').html("اسم العميل :"+name)
+	  var data={name:name,mobile:mobile,place:place,text:text_b}          
+			$.ajax({  
+					url:"check_type.php",  
+					method:"POST",  
+					data:data,  
+					success:function(data)  
+					{        if (data== -1) {
+                               alert_("تحذير","اسم العميل موجود من قبل")
+						  }else{
+							$('.left_side .select_client select ').append(data);
+							$(".left_side .add_user_dash").animate({top: "-10000px"},5);
+							input_form[0].value='';
+							input_form[1].value='';
+							input_form[2].value='';
+							$(this).parents('form').find('.text').val(" ");
+							var name_ti=data.innerHTML;
+					        $('.name_cust_in_bill').html("اسم العميل :"+name)
 
-// 						  }
+						  }
 
 
 					     
-// 					}  
+					}  
 
-// 			});
+			});
 
  
-// })
+})
 
  /////////////////////close main popup
  $(document).on("click",".pop_up_alert .upper .content button,.pop_up_alert .upper .content span",function(){
