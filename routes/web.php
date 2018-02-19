@@ -17,6 +17,9 @@ Route::group([
 	Route::resource('expense', 'ExpenseController');
 
 	Route::post('order/store', 'OrderController@frontStoreOrder')->name('saveOrder.front');
+	Route::delete('order/{order}/{id}', 'OrderController@deleteItem')->name('order.deleteItem');
+	Route::post('/order/{order}', 'OrderController@EditPaid')->name('order.editPaid');
+	Route::resource('order', 'OrderController');
 
 });
 	Route::get('/getitems', 'ItemController@getItems')->name('get.items');

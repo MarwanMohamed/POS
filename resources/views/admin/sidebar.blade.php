@@ -15,7 +15,6 @@
        
         <li class="header"><span>نماذج التحكم</span></li>
 
-        {{-- <li><a href="{{route('category.index')}}">الاقسام</a></li> --}}
         
         <li>
             <a href="#" title="Elements">
@@ -86,12 +85,19 @@
             <div class="sidebar-submenu">
 
                 <ul>
-                    <li><a href="{{route('bill.index')}}"><span>الفواتير</span></a></li>
+                    <li><a href="{{route('bill.index')}}"><span>فواتير الصيانة</span></a></li>
                     <li><a href="{{route('bill.create')}}"><span>اضافة فاتورة</span></a></li>
                 </ul>
 
             </div>
         </li>   
+
+        <li>
+            <a href="{{route('order.index')}}" title="Elements">
+                <i class="glyph-icon icon-shopping-cart"></i>
+                <span>ادارة المبيعات</span>
+            </a>
+        </li>
 
         <li>
             <a href="#" title="Elements">
