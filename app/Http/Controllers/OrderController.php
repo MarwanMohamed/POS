@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EndDay;
 use App\Item;
 use App\Order;
 use DB;
@@ -11,7 +12,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->get();
+        $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->where('end', '!=', 1)->get();
         return view('admin.orders.index', compact('orders'))->withTitle('Bills');
     }
 
@@ -87,12 +88,49 @@ class OrderController extends Controller
 
     public function EditPaid(Request $request, $bill)
     {
+        if ($request->paied_bill < 0) {
+            \Session::flash('error', 'يجب ان يكون المبلغ اكبر من 0');
+            return redirect()->back();
+        }
+
         $bills = Order::where('order_number', $bill)->get();
+
+        if ($request->paied_bill > $request->total) {
+            \Session::flash('error', 'يجب ان يكون المبلغ اقل من او يساوى الاجمالى');
+            return redirect()->back();
+        }
+
         foreach ($bills as $bill) {
             $bill->paied_bill = $request->paied_bill;
             $bill->save();
         }
 
         return redirect()->back()->with('message', 'تم تعديل المبلغ المدفوع');
+    }
+
+    public function endDay()
+    {
+        $orders = Order::whereRaw('date(created_at) = curdate()')->get();
+        foreach ($orders as $order) {
+            if ($order->end == 0) {
+                $order->update(['end' => 1]);
+                $endDay = new EndDay();
+                $endDay->order_id = $order->id;
+                $endDay->save();
+            }
+        }
+        return redirect()->back()->with('message', 'تم انهاء اليوم');
+    }
+
+    public function days()
+    {
+        $days = EndDay::select('created_at')->groupBy('created_at')->get();
+        return view('admin.days.index', compact('days'))->withTitle('Days');
+    }
+
+    public function showDay($day)
+    {
+        $orders = EndDay::whereRaw('date(created_at) = ?', [$day])->get();
+        return view('admin.days.orders', compact('orders'))->withTitle('Bills');
     }
 }

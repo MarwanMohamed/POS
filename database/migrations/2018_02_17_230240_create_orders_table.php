@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('item_id');
             $table->integer('paied_bill');
             $table->integer('need_bill')->nullable();
+            $table->boolean('end')->default(0);
             $table->timestamps();
         });
     }
