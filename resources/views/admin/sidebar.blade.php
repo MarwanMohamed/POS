@@ -3,12 +3,12 @@
 
 
     <ul id="sidebar-menu">
-        <li class="header"><span>احصائيات عامة</span></li>
+        {{-- <li class="header"><span>احصائيات عامة</span></li> --}}
 
         <li>
             <a href="{{url('/')}}" title="Admin Dashboard">
                 <i class="glyph-icon icon-linecons-tv"></i>
-                <span>لوحة التحكم</span>
+                <span>فاتورة مبيعات جديدة</span>
             </a>
         </li>
         <li class="divider"></li>

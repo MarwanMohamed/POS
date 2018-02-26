@@ -16,6 +16,7 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('engineer_id')->index()->unsigned();
+            $table->tinyInteger('bill_type')->unsigned();
             $table->integer('customer_id')->index()->unsigned();
             $table->string('type');
             $table->string('error');

@@ -32,26 +32,31 @@ class ItemController extends Controller
             'code' => 'required|integer|unique:items',
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
-            'amount' => 'integer',
-            'buy_price' => 'integer',
-            'sell_price' => 'integer',
+            'buy_price' => 'required',
         ];
         $validator = \Validator::make($request->all(), $rules);
 
         if ($request->amount < 1) {
-            \Session::flash('error', 'يجب ان يكون الكمية اكبر من 1');
+            \Session::flash('errorr', 'يجب ان يكون الكمية اكبر من 1');
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        if ($request->buy_price < 1) {
+            \Session::flash('buyerror', 'يجب ان يكون السعر اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        if ($request->sell_price < 1) {
+            \Session::flash('sellerror', 'يجب ان يكون السعر اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
         if ($request->sell_price < $request->buy_price) {
             \Session::flash('errorSell', 'يجب ان يكون سعر البيع اكثر من سعر الشراء');
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
-
-        $allData = $request->all();
-        Item::create($allData);
+        dd(11);
+        Item::create($request->all());
         return redirect()->route('item.index')->with('message', 'تم اضافة الصنف بنجاح');
     }
 
@@ -69,15 +74,23 @@ class ItemController extends Controller
             'code' => 'required|integer|unique:items,code,'.$id,
             'name' => 'required|min:3',
             'category_id' => 'required|integer',
-            'amount' => 'integer',
-            'buy_price' => 'integer',
-            'sell_price' => 'integer',
+            'buy_price' => 'required',
         ];
 
         $validator = \Validator::make($request->all(), $rules);
 
         if ($request->amount < 1) {
-            \Session::flash('error', 'يجب ان يكون الكمية اكبر من 1');
+            \Session::flash('errorr', 'يجب ان يكون الكمية اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        if ($request->buy_price < 1) {
+            \Session::flash('buyerror', 'يجب ان يكون السعر اكبر من 1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        if ($request->sell_price < 1) {
+            \Session::flash('sellerror', 'يجب ان يكون السعر اكبر من 1');
             return redirect()->back()->withInput()->withErrors($validator);
         }
 

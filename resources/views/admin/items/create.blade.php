@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }} @if(Session::has('error')) has-error @endif">
+                <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }} @if(Session::has('errorr')) has-error @endif">
                     <label class="col-sm-3 control-label">الكمية</label>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="amount" value="{{old('amount')}}">
@@ -62,12 +62,12 @@
                             </span>
                         @endif
                         <span class="help-block">
-                            <strong>{{ Session::get('error') }}</strong>
+                            <strong>{{ Session::get('errorr') }}</strong>
                         </span>
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('buy_price') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('buy_price') ? ' has-error' : '' }} @if(Session::has('buyerror')) has-error @endif">
                     <label class="col-sm-3 control-label">سعر الشراء</label>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="buy_price" value="{{old('buy_price')}}">
@@ -76,11 +76,14 @@
                                 <strong>{{ $errors->first('buy_price') }}</strong>
                             </span>
                         @endif
+                        <span class="help-block">
+                            <strong>{{ Session::get('buyerror') }}</strong>
+                        </span>
                     </div>
                 </div>
 
 
-                <div class="form-group{{ $errors->has('sell_price') ? ' has-error' : '' }} @if(Session::has('errorSell')) has-error @endif">
+                <div class="form-group{{ $errors->has('sell_price') ? ' has-error' : '' }} @if(Session::has('errorSell')) has-error @endif @if(Session::has('sellerror')) has-error @endif">
                     <label class="col-sm-3 control-label">سعر البيع</label>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="sell_price" value="{{old('sell_price')}}">
@@ -91,6 +94,9 @@
                         @endif
                         <span class="help-block">
                             <strong>{{ Session::get('errorSell') }}</strong>
+                        </span>
+                         <span class="help-block">
+                            <strong>{{ Session::get('sellerror') }}</strong>
                         </span>
                     </div>
                 </div>

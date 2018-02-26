@@ -47,7 +47,7 @@
 
 
     $(document).ready(function() {
-        $('.dataTables_filter input').attr("placeholder",  );
+       $('.dataTables_filter input').attr("placeholder", 'بحث');
     });
 
 </script>

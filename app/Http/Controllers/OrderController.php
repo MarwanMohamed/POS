@@ -37,13 +37,12 @@ class OrderController extends Controller
             'paied_bill' => 'required',
             'id_un' => 'required',
     	]);
-        $random = rand(1,999999999);
         foreach ($request->num_per_unit as $key => $value) {
             $total = 0;
             $order = new Order();
 
 
-            $order->order_number = $random;
+            $order->order_number = $request->rand_pa;
             $order->customer_id = $request->name_supplier;
             $order->num_per_unit = $request->num_per_unit[$key];
             $order->cost_per_unit = $request->cost_per_unit[$key];
@@ -110,7 +109,8 @@ class OrderController extends Controller
 
     public function endDay()
     {
-        $orders = Order::whereRaw('date(created_at) = curdate()')->get();
+        $orders = Order::where('end', '!=', 1)->get();
+
         foreach ($orders as $order) {
             if ($order->end == 0) {
                 $order->update(['end' => 1]);

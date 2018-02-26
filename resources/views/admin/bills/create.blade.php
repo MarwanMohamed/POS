@@ -27,6 +27,21 @@
                     </div>
                 </div>
 
+                <div class="form-group{{ $errors->has('bill_type') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">اسم العميل</label>
+                    <div class="col-sm-6">
+                        <select class="form-control single" name="bill_type">
+                            <option value="0">سوفت وير</option> 
+                            <option value="1">هارد وير</option> 
+                        </select>
+                        @if ($errors->has('bill_type'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('bill_type') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                     <label class="col-sm-3 control-label">نوع الجهاز</label>
                     <div class="col-sm-6">

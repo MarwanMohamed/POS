@@ -26,112 +26,26 @@
         </div>
 
 
-        <nav c{{-- lass="navbar navbar-default">
-
-            <!-- Brand and toggle get grouped for better phone display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-
-            <li> 
-              <a href="manage_staff.php?do=show_shop_staff">
-                  <span class="  glyphicon glyphicon-wrench"> </span>
-                  <span class="">ادارة العاملين</span>
-              </a>
-
-
-          </li>
-
-          <li>
-              <a href="car.php?do=cont">
-                <span class="  glyphicon glyphicon-filter"> </span>
-                <span class="">ادارة السيارات</span>
-            </a>
-        </li>
-
-
-        <li> 
-            <a href="bill_prouduct.php?do=cont">
-              <span class="news   glyphicon glyphicon-shopping-cart"></span>
-              <span class="">ادارة  المبيعات</span>
-          </a>
-        </li>
-        <li> 
-            <a href="shop.php?do=cont">
-              <span class="news   glyphicon glyphicon-shopping-cart"></span>
-              <span class="">ادارة  المحلات</span>
-          </a>
-        </li>
-
-
-
-
-        <li> 
-          <a href="dashboard.php">
-            <span class="news  glyphicon glyphicon-home"></span>
-            <span class="">الصفحة الرئيسية</span>
-        </a>
-        </li>
-
-
-
-        <!--  <li><a href=" comment.php"><span class=" user_u glyphicon glyphicon-cloud"></span></a></li>  -->
-        </ul>
-
-        <ul class="nav navbar-nav navbar-left">
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">name<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-
-
-                <li><a href="Logout.php">تسجيل الخروج</a></li>
-
-            </ul>
-        </li>
-        </ul>
-        </div>
-
-        </nav> --}}
-
+       
 <div class='container-fluid'>
 
- 
- 
-      {{--    
-
-                 <div class='_alert alert alert-success'>Done</div>
-                 <div class='_alert alert alert-danger'>Error</div>
-                 <div class='_alert alert alert-danger'></div> --}}
 
   @if($errors->any())
-                 <div class='_alert alert alert-danger'>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+      <div class='_alert alert alert-danger'>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
 
-                    @if(session()->has('message'))
-                 <div class='_alert alert alert-success'>
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
+      @if(session()->has('message'))
+   <div class='_alert alert alert-success'>
+              {{ session()->get('message') }}
+          </div>
+      @endif
 
-
- 
  
  <div class="pr_bill">
      <div  class="left_side col-xs-12 col-md-6">
@@ -175,35 +89,17 @@
               {{csrf_field()}}
                <div class="col-xs-12 select_client">
 
-              
-  
-                    <span class='save_customer btn  btn-primary'>عميل إفتراضى</span>
-                    <input type='hidden' class='shop_i' value=''>
-  
-
-                    
-
-                    
-
                     <select class=" form-control selectpicker" data-live-search="true" name="name_supplier">
 
-                        <option value="0" selected >اختار</option>
+                        <option value="0" selected >customer</option>
 
                           @foreach($customers as $customer)
-                            <option data-tokens="dd" selected value="{{$customer->id}}">{{$customer->name}}</option>
+                            <option   value="{{$customer->id}}">{{$customer->name}}</option>
                           @endforeach                         
 
                          </select>
                     
 
-                    
-
-                  
-
-                  
-                   
-
-                   
                </div>
                <div class="col-xs-12 items_s">
                    <table class="table">
@@ -237,7 +133,8 @@
                                      <label>الباقى </label>
                                    <input type="text" name="reminder_bill" value="0" disabled="">
                                    </div>
-                                 <div><input type="hidden" name="rand_pa" value=""></div>
+                              @php $random = rand(1,999999999); @endphp
+                                 <div><input type="hidden" name="rand_pa" value="{{$random}}"></div>
                               </div>
                    
                  </div>
@@ -248,8 +145,9 @@
           <input type="submit" class="btn btn-info form-control print_bill_bill" name="submit" value="طباعة">
             <div  id='print_aaa' class="col-xs-12 print_aaa" > 
              <div style="border:1px solid #000; padding:5px;overflow: hidden;text-align:center; " class=" ">
-                    {{-- <h4 style="float:right;">#</h4> --}}
-                    <h4 style="float:left;">{{date("Y-m-d")}}</h4><br>
+                  @php  date_default_timezone_set('Africa/Cairo'); @endphp
+                    <h4 style="float:right;"> {{$random}}#</h4>
+                    <h4 style="float:left;">{{Carbon\Carbon::now()}}</h4><br>
                      <h4 class="name_cust_in_bill">   </h4>
               <table  width="100%"    border="1" dir="rtl" style="border-collapse:collapse;" >
                 <thead>
@@ -285,7 +183,7 @@
                                      <label>الباقى : </label>
                                        <span></span>
                                    </div>
-                                 <div><input type="hidden" name="rand_pa" value=""></div>
+                                 <div><input type="hidden" name="rand_pa" value="{{$random}}"></div>
                                  {{--  <div style="border: 1px solid;text-align:right;direction:ltr;" class="">
                                    
                                        <span> </span>
