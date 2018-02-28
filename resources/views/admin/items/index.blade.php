@@ -63,7 +63,7 @@
     <a href="{{route('item.create')}}" class="btn btn-primary pull-right" style="margin-right: 5px">اضافة صنف</a>
 
 
-    <a href="{{route('item.showInFront')}}" class="btn btn-primary pull-right">@if($showPrice->value == 0)اظهار سعر الشراء @else اخفاء سعر الشراء @endif</a><br>
+    <a href="{{route('item.showInFront')}}" class="btn btn-primary pull-right">@if(isset($showPrice) && $showPrice->value == 0)اظهار سعر الشراء @else اخفاء سعر الشراء @endif</a><br>
 </div>
 
 
