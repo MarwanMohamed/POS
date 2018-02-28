@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableEndDay extends Migration
+class CreateRemaindersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTableEndDay extends Migration
      */
     public function up()
     {
-        Schema::create('endDay', function (Blueprint $table) {
+        Schema::create('remainders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('remainder');
             $table->integer('order_id')->index();
-            $table->text('order_number');
-            $table->dateTime('endDay');
+            $table->string('order_number')->nullable();
+            $table->dateTime('day')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTableEndDay extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endDay');
+        Schema::dropIfExists('remainders');
     }
 }

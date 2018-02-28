@@ -10,6 +10,7 @@ Route::group([
 	Route::resource('category', 'CategoriesController');
 	Route::resource('item', 'ItemController');
 	Route::resource('customer', 'CustomerController');
+	Route::resource('seller', 'SellerController');
 	Route::post('customer/store', 'CustomerController@frontStore')->name('customer.frontStore');
 	Route::resource('user', 'UserController');
 	Route::resource('engineer', 'EngineerController');
@@ -23,6 +24,7 @@ Route::group([
 	Route::delete('order/{order}/{id}', 'OrderController@deleteItem')->name('order.deleteItem');
 	Route::post('/order/{order}', 'OrderController@EditPaid')->name('order.editPaid');
 	Route::resource('order', 'OrderController');
+	Route::resource('report', 'ReportController');
 
 
 });

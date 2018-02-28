@@ -51,64 +51,51 @@
     });
 
 </script>
+<div id="page-title">
+    <a href="{{route('seller.create')}}" class="btn btn-primary pull-right">اضافة مورد</a><br>
+</div>
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">فاتورة رقم #{{$orders[0]->order_number}}</h3>
-       
-    </div>
-  
+        <h3 class="title-hero">الموردين</h3>
         <div class="example-box-wrapper">
 
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" style="direction: rtl;">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>الصنف</th>
-                        <th>العدد</th>
-                        <th>السعر</th>
-                        <th>اجمالى</th>
-                        {{-- <th>اسم العميل</th> --}}
+                        <th>اسم المورد</th>
+                        <th>حساب المورد</th>
+                        <th>باقى حساب المورد</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($orders as $key => $order)
+                    @foreach($sellers as $key => $seller)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$order->item[0]->name}}</td>
-                            <td>{{$order->num_per_unit}}</td>
-                            <td>{{$order->cost_per_unit}}</td>
-                            <td>{{$order->t_cost_per_one}}</td>
+                            <td>{{$seller->name}}</td>
+                            <td>{{$seller->cost}}</td>
+                            <td>{{$seller->need}}</td>
+                           
+                           
                             <td>
-
-                                <form id="delete_form" action="{{ route('order.deleteItem', [$order->order_number, $order->item_id]) }}" method="POST" >
+                                <a href="{{route('seller.edit', $seller->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('seller.destroy', $seller->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
                                 </form>
-                                 
+                                
                             </td>
                         </tr>
                     @endforeach
 
                 </tbody>
-            </table><br>
-
-            <h2 class="title-hero">الاجمالى {{$total}}</h2><br>
-            <h2 class="title-hero">
-                <form method="post" action="{{route('order.editPaid', $orders[0]->order_number)}}">
-                    {{csrf_field()}}
-                المدفوع <input type="number" class="form-control" name="paied_bill" value="{{$orders[0]->paied_bill}}"><br>
-                <input type="hidden" name="total" value="{{$total}}">
-                    <button type="submit" class="btn btn-primary">تعديل</button>
-
-                </form>
-            </h2><br>
-
+            </table>
         </div>
     </div>
 </div>

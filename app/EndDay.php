@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EndDay extends Model
 {
     protected $table = 'endDay';
-    protected $fillable = ['order_id'];
+    protected $fillable = ['order_id', 'endDay'];
 
     public function order()
     {

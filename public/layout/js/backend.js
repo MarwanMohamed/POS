@@ -958,7 +958,7 @@ $(document).on('click',".pr_bill .right_side .define_type_body ul li",function()
 $(document).on("click",".left_side .items_s table tbody tr td .delete_row",function(){
    var print_row_class=$(this).parents('tr').attr('id');
    $(this).parents("tr").fadeOut(1000,function(){$(this).remove();});
-   $("#print_aaa table tbody #"+print_row_class).fadeOut(1000,function(){$(this).remove();});
+   $(".print_aaa table tbody #"+print_row_class).fadeOut(1000,function(){$(this).remove();});
     var all_input=$(this).parents("tr").find("input");
     var totale=all_input[4].value;
     var input_val= $('.left_side .items_s .all_bill_c .totale_cost_bill input').val(); 
@@ -966,9 +966,9 @@ $(document).on("click",".left_side .items_s table tbody tr td .delete_row",funct
 	$(".left_side .items_s .all_bill_c .paied_bill input").val(input_val-totale);
 	//////////////////////////////////////////////////////////////////////////////////
 
-	$('#print_aaa .all_bill_c .totale_cost_bill span').text(input_val-totale);
+	$('.print_aaa .all_bill_c .totale_cost_bill span').text(input_val-totale);
 
-	$('#print_aaa .all_bill_c .paied_bill span').text(input_val-totale);
+	$('.print_aaa .all_bill_c .paied_bill span').text(input_val-totale);
 }) 
 
 
@@ -1058,7 +1058,7 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
  
 	 
 
-    $(".left_side #print_aaa table tbody").append(append_2);
+    $(".left_side .print_aaa table tbody").append(append_2);
     var all_input_inta=$('.left_side .items_s table tbody tr input');
     
   
@@ -1162,11 +1162,11 @@ $(document).on("keyup blur",".left_side .items_s table tbody tr   input",functio
  
   }
  
-  $("#print_aaa table tbody #"+print_row_class+" .num_per_unit").text(all_input_row[0].value);
-  $("#print_aaa table tbody #"+print_row_class+" .cost_per_unit").text(all_input_row[1].value);
-  $("#print_aaa table tbody #"+print_row_class+" .details_num").text(all_input_row[2].value);
-  // $("#print_aaa table tbody #"+print_row_class+" .cost_details_num  ").text(all_input_row[3].value);
-  // $("#print_aaa table tbody #"+print_row_class+" .to_c  ").text(total_row);
+  $(".print_aaa table tbody #"+print_row_class+" .num_per_unit").text(all_input_row[0].value);
+  $(".print_aaa table tbody #"+print_row_class+" .cost_per_unit").text(all_input_row[1].value);
+  $(".print_aaa table tbody #"+print_row_class+" .details_num").text(all_input_row[2].value);
+  // $(".print_aaa table tbody #"+print_row_class+" .cost_details_num  ").text(all_input_row[3].value);
+  // $(".print_aaa table tbody #"+print_row_class+" .to_c  ").text(total_row);
 
 
  
@@ -1261,9 +1261,9 @@ $('.left_side .items_s .all_bill_c .totale_cost_bill input').val(total_cost);
 $(".left_side .items_s .all_bill_c .paied_bill input").val(total_cost);
 //////////////////////////////////////////////////////////////////////////////////
 
-$('#print_aaa .all_bill_c .totale_cost_bill span').text(total_cost);
+$('.print_aaa .all_bill_c .totale_cost_bill span').text(total_cost);
 
-$('#print_aaa .all_bill_c .paied_bill span').text(total_cost);
+$('.print_aaa .all_bill_c .paied_bill span').text(total_cost);
 
 
 }
@@ -1375,9 +1375,9 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_details_nu
 // $(".left_side .items_s .all_bill_c .paied_bill input").val(total_cost);
 // //////////////////////////////////////////////////////////////////////////////////
 
-// $('#print_aaa .all_bill_c .totale_cost_bill span').text(total_cost);
+// $('.print_aaa .all_bill_c .totale_cost_bill span').text(total_cost);
 
-// $('#print_aaa .all_bill_c .paied_bill span').text(total_cost);
+// $('.print_aaa .all_bill_c .paied_bill span').text(total_cost);
 
 
 
@@ -1425,8 +1425,8 @@ $(document).on('keyup','.left_side .items_s .all_bill_c .paied_bill input',funct
     $('.left_side .items_s .all_bill_c .reminder input').val(parseFloat(this_val)-parseFloat(input_val));
 
 
-     $('#print_aaa .all_bill_c .paied_bill span').text(this_val);
-      $('#print_aaa .all_bill_c .reminder span').text(parseFloat(this_val)-parseFloat(input_val));
+     $('.print_aaa .all_bill_c .paied_bill span').text(this_val);
+      $('.print_aaa .all_bill_c .reminder span').text(parseFloat(this_val)-parseFloat(input_val));
 
 })
 $(document).on('  submit','.left_side #form_bill',function(e){
@@ -2111,6 +2111,7 @@ $(document).on("change",".left_side .select_client select",function(){
 	 
 	 var name=this.selectedOptions[0].innerHTML;
      $('.name_cust_in_bill').html("اسم العميل :"+name)
+     $('.name_cust_in_billEn').html("Client Name :"+name)
      
 });
 

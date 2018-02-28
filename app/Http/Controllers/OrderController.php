@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Back;
 use App\EndDay;
 use App\Item;
 use App\Order;
+use App\Remainder;
 use DB;
 use Illuminate\Http\Request;
 
@@ -74,8 +76,18 @@ class OrderController extends Controller
     {
         $order = Order::where('order_number', $bill)->where('item_id', $id)->first();
         $this->incrementItem($order->item_id, $order->num_per_unit);
+        $this->storeBackItem($order);
         $order->delete();
         return redirect()->back()->with('message', 'تم حذف الصنف من الفاتورة');
+    }
+
+    public function storeBackItem($item)
+    {
+        $back = new Back;
+        $back->order_id = $item->id;
+        $back->order_number = $item->order_number;
+        $back->item_id = $item->item_id;
+        $back->save();
     }
 
     private function incrementItem($id, $amount)
@@ -98,10 +110,16 @@ class OrderController extends Controller
             \Session::flash('error', 'يجب ان يكون المبلغ اقل من او يساوى الاجمالى');
             return redirect()->back();
         }
-
         foreach ($bills as $bill) {
+            $newRemainder = $request->paied_bill - $bill->paied_bill;
             $bill->paied_bill = $request->paied_bill;
+            $bill->need_bill = ($request->total - $request->paied_bill);
             $bill->save();
+            $remainder = new Remainder;
+            $remainder->remainder =  $newRemainder;
+            $remainder->order_id = $bill->id;
+            $remainder->order_number = $bill->order_number;
+            $remainder->save();
         }
 
         return redirect()->back()->with('message', 'تم تعديل المبلغ المدفوع');
@@ -116,6 +134,8 @@ class OrderController extends Controller
                 $order->update(['end' => 1]);
                 $endDay = new EndDay();
                 $endDay->order_id = $order->id;
+                $endDay->order_number = $order->order_number;
+                $endDay->endDay = $order->created_at;
                 $endDay->save();
             }
         }
@@ -130,7 +150,7 @@ class OrderController extends Controller
 
     public function showDay($day)
     {
-        $orders = EndDay::whereRaw('date(created_at) = ?', [$day])->get();
+        $orders = EndDay::whereRaw('date(created_at) = ?', [$day])->select('order_number')->groupBy('order_number')->get();
         return view('admin.days.orders', compact('orders'))->withTitle('Bills');
     }
 }

@@ -55,7 +55,6 @@ class ItemController extends Controller
             \Session::flash('errorSell', 'يجب ان يكون سعر البيع اكثر من سعر الشراء');
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        dd(11);
         Item::create($request->all());
         return redirect()->route('item.index')->with('message', 'تم اضافة الصنف بنجاح');
     }

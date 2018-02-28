@@ -51,10 +51,10 @@
     });
 
 </script>
-<div id="page-title">
+{{-- <div id="page-title">
     <a href="{{route('endDay')}}" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
     <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-</div>
+</div> --}}
 <div class="panel">
     <div class="panel-body">
         <h3 class="title-hero">المبيعات</h3>

@@ -51,10 +51,10 @@
     });
 
 </script>
-<div id="page-title">
+{{-- <div id="page-title">
     <a href="{{route('endDay')}}" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
     <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-</div>
+</div> --}}
 <div class="panel">
     <div class="panel-body">
         <h3 class="title-hero">المبيعات</h3>
@@ -76,11 +76,11 @@
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>#{{$order->order->order_number}}</td>
-                            <td>{{$order->order->customer->name}}</td>
+                            <td>#{{$order->order_number}}</td>
+                            <td>{{isset($order->order->customer->name) ? $order->order->customer->name : 'Customer'}}</td>
                            
                             <td>
-                                <a href="{{route('order.show', $order->order->order_number)}}"><i class="glyph-icon icon-eye"></i></a>
+                                <a href="{{route('order.show', $order->order_number)}}"><i class="glyph-icon icon-eye"></i></a>
                                  
                             </td>
                         </tr>

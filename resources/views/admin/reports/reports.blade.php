@@ -45,46 +45,42 @@
     });
 
 
-
     $(document).ready(function() {
        $('.dataTables_filter input').attr("placeholder", 'بحث');
     });
 
 </script>
-<div id="page-title">
-    <a href="{{route('endDay')}}" onclick="return confirm('هل انت متاكد');" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
-    <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-</div>
+
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">المبيعات</h3>
+        <h3 class="title-hero">التقارير</h3>
         <div class="example-box-wrapper">
 
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>رقم الفاتورة</th>
-                        <th>اسم العميل</th>
-                        <th>التحكم</th>
+                        <th>عدد الفواتير المباعه</th>
+                        <th>اجمالى ثمن البضاعة الاصلى</th>
+                        <th>اجمالى ثمن البضاعة الاصلى مع الارباح</th>
+                        <th>اجمالى الارباح</th>
+                        <th>اجمالى الأجل على العملاء</th>
+                        <th>القادم من الأجل</th>
+                        <th>قيمة المرتجع الخارجة من رصيد الدرج</th>
+                        <th>صافى الإيراد</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($orders as $key => $order)
-                        @if ($key % 2 == 0)
-                        <tr class="even gradeC">
-                        @else
-                        <tr class="odd gradeX">
-                        @endif 
-                            <td>#{{$order->order_number}}</td>
-                            <td>{{isset($order->customer->name) ? $order->customer->name : 'Customer'}}</td>
-                           
-                            <td>
-                                <a href="{{route('order.show', $order->order_number)}}"><i class="glyph-icon icon-eye"></i></a>
-                                 
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tr class="even gradeC">
+                        <td>{{$orders->count()}}</td>
+                        <td>{{$totalItemBuyPrice}}</td>
+                        <td>{{$totalItemSellPrice}}</td>
+                        <td>{{$totalProfit}}</td>
+                        <td>{{$remainder}}</td>
+                        <td>{{$totalPaidRemainder}}</td>
+                        <td>{{$totalBack}}</td>
+                        <td>{{$netRevenue}}</td>
+                    </tr>
 
                 </tbody>
             </table>
