@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Item;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::all();
-        return view('admin.items.index', compact('items'))->withTitle('Items');
+        $code = '';
+        if ($request->code) {
+            $items = Item::where('code', $request->code)->get();
+        } else {
+            $items = Item::all();
+        }
+        $showPrice = Setting::where('key', 'togglePrice')->first();
+        return view('admin.items.index', compact('items', 'showPrice'))->withTitle('Items');
     }
 
 
@@ -107,5 +114,21 @@ class ItemController extends Controller
     {
         Item::findOrFail($id)->delete();
         return redirect()->back()->with('message', 'تم حذف الصنف بنجاح');
+    }
+
+    public function toggelInFront()
+    {
+        $showPrice = Setting::where('key', 'togglePrice')->first();
+        if ($showPrice) {
+            $showPrice->value = ! $showPrice->value;
+            $showPrice->save();
+
+        } else{
+            $showPrice = new Setting;
+            $showPrice->key = 'togglePrice';
+            $showPrice->value = 1;
+            $showPrice->save();
+        }
+        return redirect()->back()->with('message', 'تم التعديل بنجاح');
     }
 }

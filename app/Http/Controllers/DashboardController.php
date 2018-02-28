@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Customer;
 use App\Item;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,6 +17,7 @@ class DashboardController extends Controller
     	}
     	$cats = Category::all();
     	$customers = Customer::all();
-    	return view('admin.dashboard', compact('cats', 'customers', 'items'));
+        $showPrice = Setting::where('key', 'togglePrice')->first();
+    	return view('admin.dashboard', compact('cats', 'customers', 'items', 'showPrice'));
     }
 }

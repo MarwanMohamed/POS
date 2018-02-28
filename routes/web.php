@@ -8,6 +8,7 @@ Route::group([
 	// Route::get('/', 'DashboardController@index')->name('dashboard');
 
 	Route::resource('category', 'CategoriesController');
+	Route::get('/items/showInFront', 'ItemController@toggelInFront')->name('item.showInFront');
 	Route::resource('item', 'ItemController');
 	Route::resource('customer', 'CustomerController');
 	Route::resource('seller', 'SellerController');

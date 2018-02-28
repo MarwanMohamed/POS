@@ -52,8 +52,21 @@
 
 </script>
 <div id="page-title">
-    <a href="{{route('item.create')}}" class="btn btn-primary pull-right">اضافة صنف</a><br>
+
+    <form>
+        <div class="col-sm-3">
+            <input type="text" name="code" class="form-control" placeholder="بحث بالكود">
+        </div>
+        <button class="btn btn-primary" type="submit" style="float: right;">Search</button><br>
+    </form><br>
+
+    <a href="{{route('item.create')}}" class="btn btn-primary pull-right" style="margin-right: 5px">اضافة صنف</a>
+
+
+    <a href="{{route('item.showInFront')}}" class="btn btn-primary pull-right">@if($showPrice->value == 0)اظهار سعر الشراء @else اخفاء سعر الشراء @endif</a><br>
 </div>
+
+
 
 <div class="panel">
     <div class="panel-body">

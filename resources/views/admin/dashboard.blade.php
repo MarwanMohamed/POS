@@ -320,7 +320,6 @@
       </div>
 
 
-
   </div>
   <div class="search_content"> 
 
@@ -435,6 +434,8 @@
 <script>
     $('.category').on('click', function() {
       var catId = $(this).find('input').val();
+
+      var showBuyPrice  = {{$showPrice->value}};
       $.ajax({  
         url: "{{route('get.items')}}",
         data: {catId: catId} , 
@@ -446,9 +447,13 @@
 
             // $('.new_area_select').last().append('<option value="">{{trans('areas.country')}}</option>');
             $.each(response, function(key, val){
+              if (showBuyPrice == 0) {
 
-              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية:<span class="details_num">'+val['amount']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
 
+            } else { // view buy price
+              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر الشراء: <span class="details_num">'+val['buy_price']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+            }
           });
         } else {
             $('.ulforitems').html('');
