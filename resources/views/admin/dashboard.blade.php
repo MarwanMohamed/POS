@@ -435,7 +435,7 @@
     $('.category').on('click', function() {
       var catId = $(this).find('input').val();
 
-      var showBuyPrice  = {{$showPrice->value}};
+      var showBuyPrice  = @if(isset$showPrice->value) {{$showPrice->value}} @else 0  @endif;
       $.ajax({  
         url: "{{route('get.items')}}",
         data: {catId: catId} , 
