@@ -57,7 +57,7 @@
         <div class="col-sm-3">
             <input type="text" name="code" class="form-control" placeholder="بحث بالكود">
         </div>
-        <button class="btn btn-primary" type="submit" style="float: right;">Search</button><br>
+        <button class="btn btn-primary" type="submit" style="float: right;">بحث</button><br>
     </form><br>
 
     <a href="{{route('item.create')}}" class="btn btn-primary pull-right" style="margin-right: 5px">اضافة صنف</a>
