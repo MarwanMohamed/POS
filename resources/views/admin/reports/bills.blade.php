@@ -45,56 +45,38 @@
     });
 
 
-
     $(document).ready(function() {
        $('.dataTables_filter input').attr("placeholder", 'بحث');
     });
 
 </script>
-<div id="page-title">
-
-    <form>
-        <div class="col-sm-3">
-            <input type="text" name="number" class="form-control" placeholder="بحث برقم الفاتورة">
-        </div>
-        <button class="btn btn-primary" type="submit" style="float: right;">بحث</button><br><br>
-    </form><br>
-    <a href="{{route('endDay')}}" onclick="return confirm('هل انت متاكد');" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
-    <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-
-</div>
-
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">المبيعات</h3>
+        <h3 class="title-hero">تقارير فاتورة الصيانة</h3>
         <div class="example-box-wrapper">
 
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>رقم الفاتورة</th>
-                        <th>اسم العميل</th>
-                        <th>التحكم</th>
+                        <th>نوع الفاتورة</th>
+                        <th>عدد الفواتير</th>
+                        <th>التكلفة الاجمالية</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($orders as $key => $order)
-                        @if ($key % 2 == 0)
-                        <tr class="even gradeC">
-                        @else
-                        <tr class="odd gradeX">
-                        @endif 
-                            <td>#{{$order->order_number}}</td>
-                            <td>{{isset($order->customer->name) ? $order->customer->name : 'Customer'}}</td>
-                           
-                            <td>
-                                <a href="{{route('order.show', $order->order_number)}}"><i class="glyph-icon icon-eye"></i></a>
-                                 
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tr class="even gradeC">
+                        <td>سوفت وير</td>
+                        <td>{{$billsSoft->count()}}</td>
+                        <td>{{$billsSoftTotal}}</td>
+                    </tr>
+
+                     <tr class="odd gradeX">
+                        <td>هارد وير</td>
+                        <td>{{$billsHard->count()}}</td>
+                        <td>{{$billsHardTotal}}</td>
+                    </tr>
 
                 </tbody>
             </table>

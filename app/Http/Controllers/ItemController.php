@@ -24,7 +24,7 @@ class ItemController extends Controller
 
     public function getItems(Request $request)
     {
-        return Item::where('category_id', $request->catId)->get();
+        return Item::where('category_id', $request->catId)->orWhere('code', $request->catId)->get();
     }
 
     public function create()

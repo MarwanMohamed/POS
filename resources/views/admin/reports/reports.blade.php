@@ -50,13 +50,17 @@
     });
 
 </script>
-
+<div id="page-title">
+    <div class="col-md-3">
+        <button  class="btn btn-primary print_bill_bill" style="float: right !important;" name="submit">طباعة</button>
+    </div><br>
+</div>
 <div class="panel">
     <div class="panel-body">
         <h3 class="title-hero">التقارير</h3>
         <div class="example-box-wrapper">
 
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="print_aaa">
                 <thead>
                     <tr>
                         <th>عدد الفواتير المباعه</th>
@@ -87,4 +91,33 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('script')
+<script>
+    
+$(document).on("click",'  .print_bill_bill',function(e){
+ 
+
+    var z=printthis();
+
+})
+
+  function printthis(){
+    // alert(11111111);
+                var data = document.getElementById('print_aaa').innerHTML;
+                var mywindow = window.open('', 'RESETE', 'height=400,width=400');
+                // mywindow.document.write('<html><head><style type="text/css">*{text-align:center;font-weight:bold;font-size:12px;font-family:arial;}@page{size:auto;margin:0mm 0mm 0mm 0mm;}table{border: 1px solid #000000;}</style>');
+                //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(data);
+                mywindow.document.write('</body></html>');
+
+                mywindow.print();
+
+                mywindow.close();
+                return true;
+
+    }
+</script>
 @stop

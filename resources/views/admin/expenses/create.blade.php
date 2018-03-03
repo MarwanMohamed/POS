@@ -3,43 +3,32 @@
 
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">اضافة مهندس</h3>
+        <h3 class="title-hero">اضافة مصروف</h3>
         <div class="example-box-wrapper">
-            <form class="form-horizontal bordered-row" method="post" action="{{route('engineer.store')}}">
+            <form class="form-horizontal bordered-row" method="post" action="{{route('expense.store')}}">
             	{{csrf_field()}}
                 
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اسم المهندس</label>
+                <div class="form-group{{ $errors->has('expense') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">المصروف</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="name" value="{{old('name')}}">
-                        @if ($errors->has('name'))
+                        <input type="number" class="form-control" name="expense" value="{{old('expense')}}">
+                        @if ($errors->has('expense'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('name') }}</strong>
+                                <strong>{{ $errors->first('expense') }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
 
-                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">رقم الهاتف</label>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" name="phone" value="{{old('phone')}}">
-                        @if ($errors->has('phone'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('phone') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
 
-                <div class="form-group{{ $errors->has('percentage') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">النسبة المئوية %</label>
+                <div class="form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">السبب</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="percentage" value="{{old('percentage')}}">
-                        @if ($errors->has('percentage'))
+                        <input type="text" class="form-control" name="reason" value="{{old('reason')}}">
+                        @if ($errors->has('reason'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('percentage') }}</strong>
+                                <strong>{{ $errors->first('reason') }}</strong>
                             </span>
                         @endif
                     </div>

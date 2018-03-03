@@ -12,4 +12,13 @@ class Engineer extends Model
     {
     	return $this->hasMany(Bill::class);
     }
+
+    public function totalBill()
+    {
+    	$total = 0;
+    	foreach ($this->bills as $bill) {
+    		$total += $bill->cost;
+    	}
+    	return ($total * $this->percentage) / 100;
+    }
 }

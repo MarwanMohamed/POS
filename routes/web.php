@@ -2,10 +2,10 @@
 
 Route::group([
 	'prefix' => 'admin',
-    // 'middleware' => ['admin']
+    'middleware' => ['admin']
 ], function () {
 
-	// Route::get('/', 'DashboardController@index')->name('dashboard');
+	Route::get('/', 'DashboardController@index')->name('dashboard');
 
 	Route::resource('category', 'CategoriesController');
 	Route::get('/items/showInFront', 'ItemController@toggelInFront')->name('item.showInFront');
@@ -25,19 +25,20 @@ Route::group([
 	Route::delete('order/{order}/{id}', 'OrderController@deleteItem')->name('order.deleteItem');
 	Route::post('/order/{order}', 'OrderController@EditPaid')->name('order.editPaid');
 	Route::resource('order', 'OrderController');
+	Route::get('report/bill', 'ReportController@bills')->name('report.bill');
 	Route::resource('report', 'ReportController');
 
 
 });
-	Route::get('/getitems', 'ItemController@getItems')->name('get.items');
+Route::get('/getitems', 'ItemController@getItems')->name('get.items');
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
 
-// Route::get('/', function () {
-// 	return redirect()->route('dashboard');
-// });
+Route::get('/', function () {
+	return redirect()->route('dashboard');
+});
 
 Route::get('/home', function () {
 	return redirect()->route('dashboard');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Back;
+use App\Bill;
 use App\EndDay;
 use App\Remainder;
 use Illuminate\Http\Request;
@@ -80,6 +81,24 @@ class ReportController extends Controller
             if ($order->order) {
                 $total += $order->order->t_cost_per_one;
             }
+        }
+        return $total;
+    }
+
+    public function bills()
+    {
+        $billsSoft = Bill::where('bill_type', '0')->get();
+        $billsHard = Bill::where('bill_type', '1')->get();
+        $billsSoftTotal = $this->getTotalBills($billsSoft);
+        $billsHardTotal = $this->getTotalBills($billsHard);
+        return view('admin.reports.bills', compact('billsSoft', 'billsSoftTotal', 'billsHard', 'billsHardTotal'))->withTitle('Bills Reports');
+    }
+
+    public function getTotalBills($bills)
+    {
+        $total = 0;
+        foreach ($bills as $bill) {
+            $total += $bill->cost;
         }
         return $total;
     }

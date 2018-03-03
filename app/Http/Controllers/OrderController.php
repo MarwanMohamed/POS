@@ -12,9 +12,15 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if($request->number){
+            $orders = Order::where('order_number', $request->number)->get();
+        }else{
+
         $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->where('end', '!=', 1)->get();
+        }
+
         return view('admin.orders.index', compact('orders'))->withTitle('Bills');
     }
 

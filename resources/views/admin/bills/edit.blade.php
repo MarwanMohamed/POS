@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('bill_type') ? ' has-error' : '' }}">
-                    <label class="col-sm-3 control-label">اسم العميل</label>
+                    <label class="col-sm-3 control-label">نوع الصيانة</label>
                     <div class="col-sm-6">
                         <select class="form-control single" name="bill_type">
                             <option value="0" @if($bill->bill_type == 0) selected @endif>سوفت وير</option> 

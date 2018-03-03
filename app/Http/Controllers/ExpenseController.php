@@ -21,9 +21,8 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:3',
-            'phone' => 'required',
-            'percentage' => 'required',
+            'expense' => 'required',
+            'reason' => 'required',
         ]);
         Expense::create($request->all());
         return redirect()->route('expense.index')->with('message', 'تم اضافة المصروف بنجاح');
@@ -39,9 +38,8 @@ class ExpenseController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|min:3',
-            'phone' => 'required',
-            'percentage' => 'required',
+            'expense' => 'required',
+            'reason' => 'required',
         ]);
 
         Expense::findOrFail($id)->update($request->all());

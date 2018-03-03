@@ -260,8 +260,11 @@
                  <div class="right_side col-xs-12 col-md-6">
                   <div  class="search_cus form-group  "> 
                      <form method="get">
-                        <input type="text" name="search" placeholder="بحث فى جميع المحلات"> 
+                        بحث باسم الصنف او الكود: <input type="text" name="search" placeholder="بحث فى جميع المحلات"> 
                     </form>
+
+    
+
                     <div class="row_main_cat  ">
 
                         <ul>

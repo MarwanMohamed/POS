@@ -52,7 +52,7 @@
 
 </script>
 <div id="page-title">
-    <a href="{{route('engineer.create')}}" class="btn btn-primary pull-right">اضافة مهندس</a><br>
+    <a href="{{route('expense.create')}}" class="btn btn-primary pull-right">اضافة مهندس</a><br>
 </div>
 
 <div class="panel">
@@ -63,30 +63,26 @@
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>اسم العميل</th>
-                        <th>رقم الهاتف</th>
-                        <th>النسبة المئوية</th>
-                        <th>عدد الفواتير</th>
+                        <th>المصروف</th>
+                        <th>السبب</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($engineers as $key => $engineer)
+                    @foreach($expenses as $key => $expense)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$engineer->name}}</td>
-                            <td>{{$engineer->phone}}</td>
-                            <td>{{$engineer->percentage}}%</td>
-                            <td>{{$engineer->bills->count()}}</td>
+                            <td>{{$expense->expense}}</td>
+                            <td>{{$expense->reason}}</td>
                            
                            
                             <td>
-                                <a href="{{route('engineer.edit', $engineer->id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                <form id="delete_form" action="{{ route('engineer.destroy', $engineer->id) }}" method="POST" >
+                                <a href="{{route('expense.edit', $expense->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('expense.destroy', $expense->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>

@@ -129,12 +129,21 @@
             </div>
         </li> 
 
+
         <li>
-            <a href="{{route('report.index')}}" title="Elements">
+            <a href="#" title="Elements">
                 <i class="glyph-icon icon-file-text-o"></i>
                 <span>التقارير</span>
             </a>
-        </li>
+            <div class="sidebar-submenu">
+
+                <ul>
+                    <li><a href="{{route('report.index')}}"><span>التقارير</span></a></li>
+                    <li><a href="{{route('report.bill')}}"><span>تقارير فاتورة الصيانة</span></a></li>
+                </ul>
+
+            </div>
+        </li>  
 
         
         <li>
