@@ -585,7 +585,6 @@ $(".supp_edit_form .total_cost input").on("keyup",function(){
 
 $(document).on('mousedown',".add_new_bill .add_bill_body .done_c",function(){
 
-
     var inputs=$(".add_new_bill .add_bill_body :input").find("input");
     var input_val_totale=$('.calc_total_c .total_cost_d input').val();
  
@@ -973,7 +972,6 @@ $(document).on("click",".left_side .items_s table tbody tr td .delete_row",funct
 
 
 $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
-
 	var name_snf=$(this).find(".name_snf").text();
     var all_input=$(this).find(".inp input");
     var this_id=$(this).attr('id');
@@ -1021,14 +1019,16 @@ $(document).on("click",".pr_bill .right_side .product_body .t_shop",function(){
 
  
    }else{
+
     var append_='<tr class="row1 " id="'+this_id+'">';
-  
     append_+='<td class="name">'+name_snf+'</td>';
     append_+='<td class="num_per_unit"><input type="text" name="num_per_unit[]" value="0"></td>';
     append_+='<td class="cost_per_unit"><input type="text" name="cost_per_unit[]" value="0" disabled=""></td>';
     // append_+='<td class="details_num"><input type="text" name="details_num[]" value="0"></td>';
     // append_+='<td class="cost_details_num  "><input type="text" name="cost_details_num[]" value="0" disabled=""></td>';
     append_+='<td><input type="text" name="t_cost_per_one[]" value="0"></td>';
+    append_+='<td class="hiddenAmount"><input type="hidden" name="amount[]" value="'+all_input[1].value+'"></td>';
+    append_+='<td class="hiddenBuy_price"><input type="hidden" name="buy_price[]" value="'+all_input[2].value+'"></td>';
 	append_+='<td><span class="delete_row glyphicon glyphicon-remove"></span></td>';
 	append_+='<td class="d_n">';
 	// append_+='<input type="text" name="define_type[]" value="'+all_input[5].value+'">';
@@ -1275,11 +1275,12 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_per_unit i
 	 
 		var  user_input_num_per_unit=all_input_row[0].value;
 		var  user_input_num_detalis=all_input_row[1].value;
-		var  orignal_numper_num_per_unit=all_input_row[8].value;//to checks3r el krtona
+		var  orignal_numper_num_per_unit=all_input_row[8].value;
+		// console.log(user_input_num_per_unit,orignal_numper_num_per_unit);
 		// var  orignal_numper_num_detalis=all_input_row[13].value;//to chech el3dad el mofasl
 		// var  cost_per_unit=all_input_row[10].value;//s3r el krtona aw el shwal
 		// var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
-        
+        // all_input_row[3] amouuuuuuuuuunt
         if (this_val.length>0) {
 				if (e.type=="keyup") {
 					if (parseFloat(all_input_row[2].value)>0) {
@@ -1290,32 +1291,22 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_per_unit i
 					all_input_row[4].value=(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
 					}	
 				}else{
+					if ( parseFloat(all_input_row[1].value)  < (parseFloat(all_input_row[8].value) * parseFloat(all_input_row[0].value) ))  {
 
-					if ( parseFloat(all_input_row[0].value)  > (parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) ))  {
-
-					$(".pop_up_alert .upper .content h3").html("سعر الوحدة");
-					$(".pop_up_alert .upper .content p").html("سعر الوحدة قليل");
-					$(".pop_up_alert ").fadeIn(100);
-					$(".pop_up_alert .upper").fadeIn(100);
-					// $(this).val(parseFloat(all_input_row[10].value))
-					all_input_row[4].value=(parseFloat(all_input_row[2].value)* parseFloat(all_input_row[3].value) )+(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
+						$(".pop_up_alert .upper .content h3").html("سعر الوحدة");
+						$(".pop_up_alert .upper .content p").html("سعر الوحدة قليل");
+						$(".pop_up_alert ").fadeIn(100);
+						$(".pop_up_alert .upper").fadeIn(100);
+						// $(this).val(parseFloat(all_input_row[10].value))
+						all_input_row[4].value=(parseFloat(all_input_row[2].value)* parseFloat(all_input_row[3].value) )+(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
 					
-					}else{
-					if (parseFloat(all_input_row[2].value)>0) {
-
-					all_input_row[4].value=(parseFloat(all_input_row[2].value)* parseFloat(all_input_row[3].value) )+(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
-					}else{
-
-					all_input_row[4].value=(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
 					}
 
+				
 
-					} 
-
-
-		}
- check()
- }
+				}
+		 check()
+		 }
 
 
 })
@@ -1394,11 +1385,19 @@ $(document).on("blur",".left_side .items_s table tbody tr .num_per_unit input",f
     // var  cost_per_detalis_unit=all_input_row[11].value;//s3r el krtona aw el shwal
 
 
- if (parseFloat(all_input_row[0].value )==orignal_numper_num_per_unit) {
-
-		all_input_row[2].value=0;
-		all_input_row[3].value=0;
+    	if (parseFloat(all_input_row[0].value) > parseFloat(all_input_row[3].value)) {
+			$(".pop_up_alert .upper .content h3").html("الكمية");
+			$(".pop_up_alert .upper .content p").html("الكمية غير كافية");
+			$(".pop_up_alert ").fadeIn(100);
+			$(".pop_up_alert .upper").fadeIn(100);
 		}
+
+
+ // if (parseFloat(all_input_row[0].value )==orignal_numper_num_per_unit) {
+
+	// 	all_input_row[2].value=0;
+	// 	all_input_row[3].value=0;
+	// 	}
 
 
 

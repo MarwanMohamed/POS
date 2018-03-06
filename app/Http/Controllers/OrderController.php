@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Back;
 use App\EndDay;
+use App\EndExpense;
+use App\Expense;
 use App\Item;
 use App\Order;
 use App\Remainder;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -15,11 +18,16 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if($request->number){
-            $orders = Order::where('order_number', $request->number)->get();
-        }else{
+            $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->where('order_number', $request->number)->get();
+        } elseif ($request->from && $request->to) {
+            $from = \DateTime::createFromFormat('m-d-Y',$request->from);
+            $to = \DateTime::createFromFormat('m-d-Y',$request->to);
 
-        $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->where('end', '!=', 1)->get();
+            $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->whereBetween('created_at', [$from->format('Y-m-d')." 00:00:00", $to->format('Y-m-d')." 23:59:59"])->get();
+        } else{
+            $orders = Order::select('order_number', 'customer_id')->groupBy('order_number', 'customer_id')->where('end', '!=', 1)->get();
         }
+
 
         return view('admin.orders.index', compact('orders'))->withTitle('Bills');
     }
@@ -134,6 +142,7 @@ class OrderController extends Controller
     public function endDay()
     {
         $orders = Order::where('end', '!=', 1)->get();
+        $expenses = Expense::where('end', '!=', 1)->get();
 
         foreach ($orders as $order) {
             if ($order->end == 0) {
@@ -143,6 +152,16 @@ class OrderController extends Controller
                 $endDay->order_number = $order->order_number;
                 $endDay->endDay = $order->created_at;
                 $endDay->save();
+            }
+        }
+
+        foreach ($expenses as $expense) {
+            if ($expense->end == 0) {
+                $expense->update(['end' => 1]);
+                $endExpense = new EndExpense();
+                $endExpense->expense_id = $expense->id;
+                $endExpense->endDay = $expense->created_at;
+                $endExpense->save();
             }
         }
         return redirect()->back()->with('message', 'تم انهاء اليوم');

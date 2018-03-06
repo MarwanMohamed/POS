@@ -16,9 +16,11 @@ Route::group([
 	Route::resource('user', 'UserController');
 	Route::resource('engineer', 'EngineerController');
 	Route::resource('bill', 'BillController');
+	Route::get('/expense/endExpense', 'ExpenseController@endExpense')->name('endExpense');
 	Route::resource('expense', 'ExpenseController');
 	
 	Route::get('/order/days/{day}', 'OrderController@showDay')->name('day.show');
+	Route::get('/expense/days/{day}', 'ExpenseController@showDay')->name('expenseDay.show');
 	Route::get('/order/endDay', 'OrderController@endDay')->name('endDay');
 	Route::get('/order/days', 'OrderController@days')->name('days');
 	Route::post('order/store', 'OrderController@frontStoreOrder')->name('saveOrder.front');

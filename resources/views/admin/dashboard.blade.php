@@ -295,29 +295,7 @@
               <li class="col-xs-12 col-md-3 t_shop" id="{{$item->id}}"><span class="name_snf">{{$item->name}}</span><br><span>الكمية:<span class="details_num">{{$item->amount}}</span></span><br><div class="inp"><input type="hidden" value="{{$item->id}}"><input type="hidden" value="{{$item->amount}}"><input type="hidden" value="{{$item->sell_price}}"></li>
                 @endforeach
                 @endif
-              {{-- <li class="col-xs-12 col-md-3 t_shop" id="main485">
-                  <span class="name_snf">صن شاين مفتت</span><br>
-                  <span><span class="num_pre_unit">49</span>(كرتونة)</span><br>
-                  <span>القطع المتاحة:<span class="details_num">30</span></span><br>
-                  <span>سعر  كرتونة :<span class="details_num">470</span></span><br>
-                  <span>سعر القطعة:<span class="num_per_det">9.79</span></span><br>
-                  <div class="inp"><input type="hidden" value="485">
-                  <input type="hidden" value="49"><input type="hidden" value="30">
-                  <input type="hidden" value="470"><input type="hidden" value="9.79167">
-                  <input type="hidden" value="77"><input type="hidden" value="48"></div>
-              </li> --}}
-
-              {{-- <li class="col-xs-12 col-md-3 o_shop" id="main485">
-                  <span class="name_snf">صن شاين مفتت</span><br>
-                  <span><span class="num_pre_unit">49</span>(كرتونة)</span><br>
-                  <span>القطع المتاحة:<span class="details_num">30</span></span><br>
-                  <span>سعر  كرتونة :<span class="details_num">470</span></span><br>
-                  <span>سعر القطعة:<span class="num_per_det">9.79</span></span><br>
-                  <div class="inp"><input type="hidden" value="485">
-                  <input type="hidden" value="49"><input type="hidden" value="30">
-                  <input type="hidden" value="470"><input type="hidden" value="9.79167">
-                  <input type="hidden" value="77"><input type="hidden" value="48"></div>
-              </li> --}}
+              
           </ul>
 
       </div>
@@ -452,10 +430,10 @@
             $.each(response, function(key, val){
               if (showBuyPrice == 0) {
 
-              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
 
             } else { // view buy price
-              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر الشراء: <span class="details_num">'+val['buy_price']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+              $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر الشراء: <span class="details_num">'+val['buy_price']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
             }
           });
         } else {

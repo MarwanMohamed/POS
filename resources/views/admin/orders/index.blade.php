@@ -54,11 +54,33 @@
 <div id="page-title">
 
     <form>
+
+        <div class="col-sm-3">
+
+            <div class="input-prepend input-group">
+                <span class="add-on input-group-addon">
+                    <i class="glyph-icon icon-calendar"></i>
+                </span>
+                <input type="text" class="bootstrap-datepicker form-control" value="{{old('from')}}" name="from" data-date-format="dd/mm/yy" placeholder="من">
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="input-prepend input-group">
+                <span class="add-on input-group-addon">
+                    <i class="glyph-icon icon-calendar"></i>
+                </span>
+                <input type="text" class="bootstrap-datepicker form-control" value="{{old('to')}}" name="to" data-date-format="dd/mm/yy" placeholder="الى">
+            </div>
+        </div>
+
         <div class="col-sm-3">
             <input type="text" name="number" class="form-control" placeholder="بحث برقم الفاتورة">
         </div>
         <button class="btn btn-primary" type="submit" style="float: right;">بحث</button><br><br>
     </form><br>
+
+   
     <a href="{{route('endDay')}}" onclick="return confirm('هل انت متاكد');" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
     <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
 
@@ -101,4 +123,19 @@
         </div>
     </div>
 </div>
+@stop
+
+
+@section('script')
+
+<script type="text/javascript" src="{{asset('assets/widgets/datepicker/datepicker.js')}}"></script>
+
+<script type="text/javascript">
+
+    $(function() { "use strict";
+        $('.bootstrap-datepicker').bsdatepicker({
+            format: 'mm-dd-yyyy'
+        });
+    });
+</script>
 @stop

@@ -51,46 +51,34 @@
     });
 
 </script>
-<div id="page-title">
-    <a href="{{route('expense.create')}}" class="btn btn-primary" style="float: right">اضافة مصروف
-    </a>
-    <a href="{{route('endExpense')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-    <br>
-</div>
-
+{{-- <div id="page-title">
+    <a href="{{route('endDay')}}" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
+    <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
+</div> --}}
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">المصروفات</h3>
+        <h3 class="title-hero">المبيعات</h3>
         <div class="example-box-wrapper">
 
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>المصروف</th>
-                        <th>السبب</th>
+                        <th>اليوم</th>
                         <th>التحكم</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($expenses as $key => $expense)
+                    @foreach($days as $key => $day)
                         @if ($key % 2 == 0)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$expense->expense}}</td>
-                            <td>{{$expense->reason}}</td>
-                           
-                           
+                            <td> {{$day->created_at->format('Y:m:d')}} - {{$day->getDay($day->created_at->format('l'))}}</td>
                             <td>
-                                <a href="{{route('expense.edit', $expense->id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                <form id="delete_form" action="{{ route('expense.destroy', $expense->id) }}" method="POST" >
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
-                                </form>
-                                
+                                <a href="{{route('expenseDay.show', $day->created_at->format('Y:m:d'))}}"><i class="glyph-icon icon-eye"></i></a>
+                                 
                             </td>
                         </tr>
                     @endforeach

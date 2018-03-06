@@ -51,13 +51,10 @@
     });
 
 </script>
-<div id="page-title">
-    <a href="{{route('expense.create')}}" class="btn btn-primary" style="float: right">اضافة مصروف
-    </a>
-    <a href="{{route('endExpense')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-    <br>
-</div>
-
+{{-- <div id="page-title">
+    <a href="{{route('endDay')}}" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
+    <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
+</div> --}}
 <div class="panel">
     <div class="panel-body">
         <h3 class="title-hero">المصروفات</h3>
@@ -79,13 +76,12 @@
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$expense->expense}}</td>
-                            <td>{{$expense->reason}}</td>
-                           
+                            <td>{{$expense->expense->expense}}</td>
+                            <td>{{$expense->expense->reason}}</td>
                            
                             <td>
-                                <a href="{{route('expense.edit', $expense->id)}}"><i class="glyph-icon icon-edit"></i></a>
-                                <form id="delete_form" action="{{ route('expense.destroy', $expense->id) }}" method="POST" >
+                               <a href="{{route('expense.edit', $expense->expense->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('expense.destroy', $expense->expense->id) }}" method="POST" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
