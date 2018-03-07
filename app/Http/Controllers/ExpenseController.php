@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $expenses = Expense::where('end', '!=', 1)->get();
+
+        if($request->reason){
+            $expenses = Expense::where('reason', 'like', "%$request->reason%")->get();
+        } elseif ($request->from && $request->to) {
+            $from = \DateTime::createFromFormat('m-d-Y',$request->from);
+            $to = \DateTime::createFromFormat('m-d-Y',$request->to);
+
+            $expenses = Expense::whereBetween('created_at', [$from->format('Y-m-d')." 00:00:00", $to->format('Y-m-d')." 23:59:59"])->get();
+        } else{
+            $expenses = Expense::where('end', '!=', 1)->get();
+        }
+
+
         return view('admin.expenses.index', compact('expenses'))->withTitle('Expenses');
     }
 
