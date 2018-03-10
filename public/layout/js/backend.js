@@ -1291,7 +1291,10 @@ $(document).on("blur keyup",".left_side .items_s table tbody tr .cost_per_unit i
 					all_input_row[4].value=(parseFloat(all_input_row[1].value)* parseFloat(all_input_row[0].value) )
 					}	
 				}else{
-					if ( parseFloat(all_input_row[1].value)  < (parseFloat(all_input_row[8].value) * parseFloat(all_input_row[0].value) ))  {
+					console.log(all_input_row[1].value);
+					console.log(all_input_row[8].value);
+					console.log(all_input_row[0].value);
+					if ( parseFloat(all_input_row[1].value)  < (parseFloat(all_input_row[8].value)  ))  {
 
 						$(".pop_up_alert .upper .content h3").html("سعر الوحدة");
 						$(".pop_up_alert .upper .content p").html("سعر الوحدة قليل");

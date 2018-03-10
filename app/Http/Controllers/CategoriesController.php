@@ -49,9 +49,11 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+        if($category->cat_image){
 
-        if (file_exists(public_path("/uploads/".$category->cat_image)))
-            unlink("uploads/".$category->cat_image);
+            if (file_exists(public_path("/uploads/".$category->cat_image)))
+                unlink("uploads/".$category->cat_image);
+        }
         
         $category->delete();
         return redirect()->back()->with('message', 'تم حذف الفئة بنجاح');
