@@ -39,7 +39,11 @@
     </ul>
 </div>
 @endif
-
+@if(Session::has('moreZero'))
+ <div class='_alert alert alert-danger'>
+ {{ Session::get('moreZero') }}
+ </div>
+@endif
 @if(session()->has('message'))
 <div class='_alert alert alert-success'>
   {{ session()->get('message') }}

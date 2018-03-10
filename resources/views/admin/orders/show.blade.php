@@ -99,6 +99,8 @@
             </table><br>
 
             <h2 class="title-hero">الاجمالى {{$total}}</h2><br>
+
+            @if(!$total == $orders[0]->paied_bill)
             <h2 class="title-hero">
                 <form method="post" action="{{route('order.editPaid', $orders[0]->order_number)}}">
                     {{csrf_field()}}
@@ -108,7 +110,7 @@
 
                 </form>
             </h2><br>
-
+            @endif
         </div>
     </div>
 </div>

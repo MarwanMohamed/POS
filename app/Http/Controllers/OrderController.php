@@ -53,6 +53,12 @@ class OrderController extends Controller
             'paied_bill' => 'required',
             'id_un' => 'required',
     	]);
+        foreach ($request->t_cost_per_one as $one) {
+            if($one < 1){
+                \Session::flash('moreZero', 'يجب ان يكون سعر البيع اكبر من سعر الشراء');
+                return redirect()->back();
+            }
+        }
         foreach ($request->num_per_unit as $key => $value) {
             $total = 0;
             $order = new Order();
@@ -67,6 +73,11 @@ class OrderController extends Controller
 
             foreach ($request->t_cost_per_one as $tCost) {
                 $total += $tCost;
+
+            }
+            if($request->paied_bill > $total) {
+                \Session::flash('moreZero', 'المدفوع اكتر من الاجمالى');
+                return redirect()->back();
             }
 
             $order->paied_bill = $request->paied_bill;
