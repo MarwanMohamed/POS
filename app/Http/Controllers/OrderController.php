@@ -12,6 +12,8 @@ use App\Remainder;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Bill;
+use App\EndBill;
 
 class OrderController extends Controller
 {
@@ -154,6 +156,7 @@ class OrderController extends Controller
     {
         $orders = Order::where('end', '!=', 1)->get();
         $expenses = Expense::where('end', '!=', 1)->get();
+        $bills = Bill::where('end', '!=', 1)->get();
 
         foreach ($orders as $order) {
             if ($order->end == 0) {
@@ -173,6 +176,16 @@ class OrderController extends Controller
                 $endExpense->expense_id = $expense->id;
                 $endExpense->endDay = $expense->created_at;
                 $endExpense->save();
+            }
+        }
+
+         foreach ($bills as $bill) {
+            if ($bill->end == 0) {
+                $bill->update(['end' => 1]);
+                $endbill = new EndBill();
+                $endbill->bill_id = $bill->id;
+                $endbill->endDay = $bill->created_at;
+                $endbill->save();
             }
         }
         return redirect()->back()->with('message', 'تم انهاء اليوم');

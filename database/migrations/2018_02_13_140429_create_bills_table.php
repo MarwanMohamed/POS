@@ -24,6 +24,7 @@ class CreateBillsTable extends Migration
             $table->string('out');
             $table->string('cost');
             $table->text('note')->nullable();
+            $table->boolean('end')->default(0);
             $table->timestamps();
         });
     }

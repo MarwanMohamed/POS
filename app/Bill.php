@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
-    protected $fillable = ['engineer_id', 'bill_type', 'customer_id', 'type', 'error', 'in', 'out', 'cost', 'note'];
+    protected $fillable = ['engineer_id', 'bill_type', 'customer_id', 'type', 'error', 'in', 'out', 'cost', 'note', 'end'];
 
 
     public function engineer()

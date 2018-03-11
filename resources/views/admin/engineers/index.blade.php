@@ -66,8 +66,8 @@
                         <th>اسم المهندس</th>
                         <th>رقم الهاتف</th>
                         <th>النسبة المئوية</th>
-                        <th>عدد الفواتير</th>
-                        <th>التكلفة الاجمالية</th>
+                        <!-- <th>عدد الفواتير</th> -->
+                        <!-- <th>التكلفة الاجمالية</th> -->
                         <th>التحكم</th>
                     </tr>
                 </thead>
@@ -82,8 +82,8 @@
                             <td>{{$engineer->name}}</td>
                             <td>{{$engineer->phone}}</td>
                             <td>{{$engineer->percentage}}%</td>
-                            <td>{{$engineer->bills->count()}}</td>
-                            <td>{{$engineer->totalBill()}}</td>
+                            <!-- <td>{{$engineer->bills->count()}}</td> -->
+                            <!-- <td>{{$engineer->totalBill()}}</td> -->
                            
                             <td>
                                 <a href="{{route('engineer.edit', $engineer->id)}}"><i class="glyph-icon icon-edit"></i></a>
