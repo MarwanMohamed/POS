@@ -6,15 +6,14 @@ use App\Bill;
 use App\Customer;
 use App\Engineer;
 use Illuminate\Http\Request;
+use App\EndBill;
 
 class BillController extends Controller
 {
     public function index(Request $request)
     {
 
-        if($request->number){
-            $bills = Bill::where('order_number', $request->number)->get();
-        } elseif ($request->from && $request->to) {
+       if ($request->from && $request->to) {
             $from = \DateTime::createFromFormat('m-d-Y',$request->from);
             $to = \DateTime::createFromFormat('m-d-Y',$request->to);
 
@@ -79,5 +78,18 @@ class BillController extends Controller
     {
         Bill::findOrFail($id)->delete();
         return redirect()->back()->with('message', 'تم حذف الفاتورة بنجاح');
+    }
+
+
+    public function days()
+    {
+        $days = EndBill::select('created_at')->groupBy('created_at')->get();
+        return view('admin.bills.days', compact('days'))->withTitle('Days');
+    }
+
+    public function showDay($day)
+    {
+        $bills = EndBill::whereRaw('date(created_at) = ?', [$day])->get();
+        return view('admin.bills.inDay', compact('bills'))->withTitle('Bills');
     }
 }

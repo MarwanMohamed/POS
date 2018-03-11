@@ -49,7 +49,8 @@
   {{ session()->get('message') }}
 </div>
 @endif
-
+<br>
+<a href="{{route('category.index')}}" class="btn btn-primary">لوحة التحكم</a>
 
 <div class="pr_bill">
    <div  class="left_side col-xs-12 col-md-6">

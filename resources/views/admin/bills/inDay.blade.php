@@ -55,31 +55,7 @@
     <a href="{{route('bill.create')}}" class="btn btn-primary">اضافة فاتورة</a>
     <a href="{{route('engineer.create')}}" class="btn btn-primary">اضافة مهندس</a>
     <a href="{{route('customer.create')}}" class="btn btn-primary">اضافة عميل</a><br>
-     <form>
 
-        <div class="col-sm-3">
-
-            <div class="input-prepend input-group">
-                <span class="add-on input-group-addon">
-                    <i class="glyph-icon icon-calendar"></i>
-                </span>
-                <input type="text" class="bootstrap-datepicker form-control" value="{{old('from')}}" name="from" data-date-format="dd/mm/yy" placeholder="من">
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="input-prepend input-group">
-                <span class="add-on input-group-addon">
-                    <i class="glyph-icon icon-calendar"></i>
-                </span>
-                <input type="text" class="bootstrap-datepicker form-control" value="{{old('to')}}" name="to" data-date-format="dd/mm/yy" placeholder="الى">
-            </div>
-        </div>
-
-        
-        <button class="btn btn-primary" type="submit" style="float: right;">بحث</button><br><br>
-    </form><br>
-    <a href="{{route('bills.days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
 </div>
 
 <div class="panel">
@@ -106,12 +82,12 @@
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td>{{$bill->customer->name}}</td>
-                            <td>{{$bill->type}}</td>
-                            <td>{{$bill->error}}</td>
-                            <td>{{$bill->in}}</td>
-                            <td>{{$bill->out}}</td>
-                            <td>{{$bill->engineer->name}}</td>
+                            <td>{{$bill->bill->customer->name}}</td>
+                            <td>{{$bill->bill->type}}</td>
+                            <td>{{$bill->bill->error}}</td>
+                            <td>{{$bill->bill->in}}</td>
+                            <td>{{$bill->bill->out}}</td>
+                            <td>{{$bill->bill->engineer->name}}</td>
                            
                             <td>
                                 <a href="{{route('bill.edit', $bill->id)}}"><i class="glyph-icon icon-edit"></i></a>
@@ -130,18 +106,4 @@
         </div>
     </div>
 </div>
-@stop
-
-@section('script')
-
-<script type="text/javascript" src="{{asset('assets/widgets/datepicker/datepicker.js')}}"></script>
-
-<script type="text/javascript">
-
-    $(function() { "use strict";
-        $('.bootstrap-datepicker').bsdatepicker({
-            format: 'mm-dd-yyyy'
-        });
-    });
-</script>
 @stop

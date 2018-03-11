@@ -23,7 +23,7 @@ class EndDay extends Model
 			'Thursday' => 'الخميس',
 			'Friday' => 'الجمعه',
 			'Saturday' => 'السبت',
-			'Sunday' => 'الاحر',
+			'Sunday' => 'الاحد',
     	];
 
     	return $days[$day];

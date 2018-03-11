@@ -15,7 +15,10 @@ Route::group([
 	Route::post('customer/store', 'CustomerController@frontStore')->name('customer.frontStore');
 	Route::resource('user', 'UserController');
 	Route::resource('engineer', 'EngineerController');
+	Route::get('/bill/days', 'BillController@days')->name('bills.days');
+	Route::get('/bills/days/{day}', 'BillController@showDay')->name('bills.show.days');
 	Route::resource('bill', 'BillController');
+
 	Route::get('/expense/endExpense', 'ExpenseController@endExpense')->name('endExpense');
 	Route::resource('expense', 'ExpenseController');
 	
