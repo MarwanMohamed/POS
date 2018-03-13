@@ -14,6 +14,8 @@ Route::group([
 	Route::resource('seller', 'SellerController');
 	Route::post('customer/store', 'CustomerController@frontStore')->name('customer.frontStore');
 	Route::resource('user', 'UserController');
+	Route::get('/engineer/days', 'EngineerController@days')->name('engineers.days');
+	Route::get('/engineer/days/{day}', 'EngineerController@showDay')->name('engineers.show.days');
 	Route::resource('engineer', 'EngineerController');
 	Route::get('/bill/days', 'BillController@days')->name('bills.days');
 	Route::get('/bills/days/{day}', 'BillController@showDay')->name('bills.show.days');

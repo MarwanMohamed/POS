@@ -16,6 +16,7 @@ class CreateEndBillsDay extends Migration
         Schema::create('endBills', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bill_id')->index();
+            $table->integer('engineer_id')->index();
             $table->dateTime('endDay');
             $table->timestamps();
         });

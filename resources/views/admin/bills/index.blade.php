@@ -55,7 +55,7 @@
     <a href="{{route('bill.create')}}" class="btn btn-primary">اضافة فاتورة</a>
     <a href="{{route('engineer.create')}}" class="btn btn-primary">اضافة مهندس</a>
     <a href="{{route('customer.create')}}" class="btn btn-primary">اضافة عميل</a><br>
-     <form>
+    <form>
 
         <div class="col-sm-3">
 

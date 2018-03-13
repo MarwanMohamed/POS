@@ -53,6 +53,31 @@
 </script>
 <div id="page-title">
     <a href="{{route('engineer.create')}}" class="btn btn-primary pull-right">اضافة مهندس</a><br>
+    <form>
+
+        <div class="col-sm-3">
+
+            <div class="input-prepend input-group">
+                <span class="add-on input-group-addon">
+                    <i class="glyph-icon icon-calendar"></i>
+                </span>
+                <input type="text" class="bootstrap-datepicker form-control" value="{{old('from')}}" name="from" data-date-format="dd/mm/yy" placeholder="من">
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="input-prepend input-group">
+                <span class="add-on input-group-addon">
+                    <i class="glyph-icon icon-calendar"></i>
+                </span>
+                <input type="text" class="bootstrap-datepicker form-control" value="{{old('to')}}" name="to" data-date-format="dd/mm/yy" placeholder="الى">
+            </div>
+        </div>
+
+        
+        <button class="btn btn-primary" type="submit" style="float: right;">بحث</button><br><br>
+    </form><br>
+    <a href="{{route('engineers.days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
 </div>
 
 <div class="panel">
@@ -66,8 +91,6 @@
                         <th>اسم المهندس</th>
                         <th>رقم الهاتف</th>
                         <th>النسبة المئوية</th>
-                        <!-- <th>عدد الفواتير</th> -->
-                        <!-- <th>التكلفة الاجمالية</th> -->
                         <th>التحكم</th>
                     </tr>
                 </thead>
@@ -82,8 +105,6 @@
                             <td>{{$engineer->name}}</td>
                             <td>{{$engineer->phone}}</td>
                             <td>{{$engineer->percentage}}%</td>
-                            <!-- <td>{{$engineer->bills->count()}}</td> -->
-                            <!-- <td>{{$engineer->totalBill()}}</td> -->
                            
                             <td>
                                 <a href="{{route('engineer.edit', $engineer->id)}}"><i class="glyph-icon icon-edit"></i></a>
@@ -102,4 +123,18 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('script')
+
+<script type="text/javascript" src="{{asset('assets/widgets/datepicker/datepicker.js')}}"></script>
+
+<script type="text/javascript">
+
+    $(function() { "use strict";
+        $('.bootstrap-datepicker').bsdatepicker({
+            format: 'mm-dd-yyyy'
+        });
+    });
+</script>
 @stop

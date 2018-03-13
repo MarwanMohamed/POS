@@ -183,6 +183,7 @@ class OrderController extends Controller
             if ($bill->end == 0) {
                 $bill->update(['end' => 1]);
                 $endbill = new EndBill();
+                $endbill->engineer_id = $bill->engineer_id;
                 $endbill->bill_id = $bill->id;
                 $endbill->endDay = $bill->created_at;
                 $endbill->save();

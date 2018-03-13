@@ -51,36 +51,52 @@
     });
 
 </script>
-{{-- <div id="page-title">
-    <a href="{{route('endDay')}}" class="btn btn-primary" style="float: right;">انهاء اليوم</a>
-    <a href="{{route('days')}}" class="btn btn-primary" style="float: right; margin-right: 5px">الايام</a><br>
-</div> --}}
+<div id="page-title">
+
+</div>
+
 <div class="panel">
     <div class="panel-body">
-        <h3 class="title-hero">الايام</h3>
+        <h3 class="title-hero">الفواتير</h3>
         <div class="example-box-wrapper">
 
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable-example">
                 <thead>
                     <tr>
-                        <th>اليوم</th>
-                        <th>التحكم</th>
+                        <th>اسم المهندس</th>
+                        <th>رقم الهاتف</th>
+                        <th>النسبة المئوية</th>
+                        <th>عدد الفواتير</th>
+                        <th>التكلفة الاجمالية</th>
+                        
+                        <!-- <th>التحكم</th> -->
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($days as $key => $day)
+                    @foreach($engineers as $key => $engineer)
                         @if ($key % 2 == 0)
+                        @if($loop->first)
                         <tr class="even gradeC">
                         @else
                         <tr class="odd gradeX">
                         @endif 
-                            <td> {{$day->created_at->format('Y:m:d')}} - {{$day->getDay($day->created_at->format('l'))}}</td>
-                            <td>
-                                <a href="{{route('bills.show.days', $day->created_at->format('Y:m:d'))}}"><i class="glyph-icon icon-eye"></i></a>
-                                 
-                            </td>
+                            <td>{{$engineer->bill->engineer->name}}</td>
+                            <td>{{$engineer->bill->engineer->phone}}</td>
+                            <td>{{$engineer->bill->engineer->percentage}}%</td>
+                            <td>{{$engineer->dateBills(request()->from, request()->to)}}</td>
+                            <td>{{($engineer->totalBills(request()->from, request()->to) * $engineer->bill->engineer->percentage) / 100}}</td>
+                           <!--  <td>
+                                <a href="{{route('engineer.edit', $engineer->id)}}"><i class="glyph-icon icon-edit"></i></a>
+                                <form id="delete_form" action="{{ route('engineer.destroy', $engineer->id) }}" method="POST" >
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button class="form_button" onclick="return confirm('هل انت متاكد');" ><i class="glyph-icon icon-trash"></i></button>
+                                </form>
+                                
+                            </td> -->
                         </tr>
+                        @endif
                     @endforeach
 
                 </tbody>

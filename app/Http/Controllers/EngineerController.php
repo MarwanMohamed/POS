@@ -4,13 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Engineer;
 use Illuminate\Http\Request;
+use App\EndBill;
+use App\Bill;
 
 class EngineerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $engineers = Engineer::all();
-        return view('admin.engineers.index', compact('engineers'))->withTitle('Engineers');
+
+         if ($request->from && $request->to) {
+            $from = \DateTime::createFromFormat('m-d-Y',$request->from);
+            $to = \DateTime::createFromFormat('m-d-Y',$request->to);
+
+            $engineers = EndBill::whereBetween('created_at', [$from->format('Y-m-d')." 00:00:00", $to->format('Y-m-d')." 23:59:59"])->get();
+            return view('admin.engineers.fromTo', compact('engineers'))->withTitle('Engineers');
+
+        } else{
+            $engineers = Engineer::all();
+            return view('admin.engineers.index', compact('engineers'))->withTitle('Engineers');
+        }
+
     }
 
     public function create()
@@ -53,4 +66,17 @@ class EngineerController extends Controller
         Engineer::findOrFail($id)->delete();
         return redirect()->back()->with('message', 'تم حذف المهندس بنجاح');
     }
+
+    public function days()
+    {
+        $days = EndBill::select('created_at')->groupBy('created_at')->get();
+        return view('admin.engineers.days', compact('days'))->withTitle('Days');
+    }
+
+    public function showDay($day)
+    {
+        $bills = EndBill::whereRaw('date(created_at) = ?', [$day])->get()->groupBy('engineer_id');
+        return view('admin.engineers.inDay', compact('bills'))->withTitle('Bills');
+    }
+
 }

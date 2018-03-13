@@ -77,7 +77,7 @@
                         @endif 
                             <td> {{$day->created_at->format('Y:m:d')}} - {{$day->getDay($day->created_at->format('l'))}}</td>
                             <td>
-                                <a href="{{route('bills.show.days', $day->created_at->format('Y:m:d'))}}"><i class="glyph-icon icon-eye"></i></a>
+                                <a href="{{route('engineers.show.days', $day->created_at->format('Y:m:d'))}}"><i class="glyph-icon icon-eye"></i></a>
                                  
                             </td>
                         </tr>

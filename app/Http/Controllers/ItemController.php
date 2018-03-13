@@ -41,7 +41,7 @@ class ItemController extends Controller
             'category_id' => 'required|integer',
             'buy_price' => 'required',
         ];
-        $validator = \Validator::make($request->all(), $rules);
+        $validator = \Validator::make($request->all(), $rules)->validate();
 
         if ($request->amount < 1) {
             \Session::flash('errorr', 'يجب ان يكون الكمية اكبر من 1');
@@ -83,7 +83,7 @@ class ItemController extends Controller
             'buy_price' => 'required',
         ];
 
-        $validator = \Validator::make($request->all(), $rules);
+        $validator = \Validator::make($request->all(), $rules)->validate();
 
         if ($request->amount < 1) {
             \Session::flash('errorr', 'يجب ان يكون الكمية اكبر من 1');
