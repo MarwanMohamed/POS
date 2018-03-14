@@ -37,6 +37,9 @@ Route::group([
 
 
 });
+
+Route::get('/get/searchName/items', 'DashboardController@searchName')->name('get.searchName.items');
+Route::get('/get/searchCode/items', 'DashboardController@searchCode')->name('get.searchCode.items');
 Route::get('/getitems', 'ItemController@getItems')->name('get.items');
 
 Route::get('/', 'DashboardController@index')->name('dashboard');

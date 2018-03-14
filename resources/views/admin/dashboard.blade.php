@@ -264,11 +264,9 @@
 
                  <div class="right_side col-xs-12 col-md-6">
                   <div  class="search_cus form-group  "> 
-                     <form method="get">
-                        بحث باسم الصنف او الكود: <input type="text" name="search" placeholder="بحث فى جميع المحلات"> 
-                    </form>
+                        بحث باسم الصنف : <input type="text" id="inputNameSearch" name="search" placeholder="بحث فى جميع المحلات"> <br>
+                        بحث باسم الكود: <input type="text" id="inputCodeSearch" name="search" placeholder="بحث فى جميع المحلات"> 
 
-    
 
                     <div class="row_main_cat  ">
 
@@ -447,6 +445,75 @@
         }
     }
 });
+  });
+</script>
+
+
+<script>
+    $('#inputNameSearch').keyup(function(e){
+        if(e.which == 13) {
+            var data = $('#inputNameSearch').val();
+            var showBuyPrice  = @if(isset($showPrice->value)) {{$showPrice->value}} @else 0  @endif;
+            $.ajax({  
+                url: "{{route('get.searchName.items')}}",
+                data: {data: data} , 
+                method:"get",  
+                success:function(response)  
+                {      
+
+                    if (response.length > 0) {
+
+                        $.each(response, function(key, val){
+                          if (showBuyPrice == 0) {
+
+                          $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+
+                        } else { // view buy price
+                          $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر الشراء: <span class="details_num">'+val['buy_price']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+                        }
+                      });
+                    } else {
+                        $('.ulforitems').html('');
+                        $('.ulforitems').append('<div class="_alert alert alert-danger col-xs-12">لا يوجد منتجات من هذا الصنف </div>');
+                    }
+                }
+
+            });
+        }
+  });
+</script>
+
+<script>
+    $('#inputCodeSearch').keyup(function(e){
+        if(e.which == 13) {
+            var data = $('#inputCodeSearch').val();
+            var showBuyPrice  = @if(isset($showPrice->value)) {{$showPrice->value}} @else 0  @endif;
+            $.ajax({  
+                url: "{{route('get.searchCode.items')}}",
+                data: {data: data} , 
+                method:"get",  
+                success:function(response)  
+                {      
+
+                    if (response.length > 0) {
+
+                        $.each(response, function(key, val){
+                          if (showBuyPrice == 0) {
+
+                          $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+
+                        } else { // view buy price
+                          $('.ulforitems').append('<li class="col-xs-12 col-md-3 t_shop" id="'+val['id']+'"><span class="name_snf">'+val['name']+'</span><br><span>الكمية: <span class="details_num">'+val['amount']+'</span></span><br><span>سعر الشراء: <span class="details_num">'+val['buy_price']+'</span></span><br><span>سعر البيع: <span class="details_num">'+val['sell_price']+'</span></span><br><div class="inp"><input type="hidden" value="'+val['id']+'"><input type="hidden" value="'+val['amount']+'"><input type="hidden" value="'+val['buy_price']+'"><input type="hidden" value="'+val['sell_price']+'"></li>');
+                        }
+                      });
+                    } else {
+                        $('.ulforitems').html('');
+                        $('.ulforitems').append('<div class="_alert alert alert-danger col-xs-12">لا يوجد منتجات من هذا الصنف </div>');
+                    }
+                }
+
+            });
+        }
   });
 </script>
 

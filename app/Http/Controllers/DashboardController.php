@@ -20,4 +20,14 @@ class DashboardController extends Controller
         $showPrice = Setting::where('key', 'togglePrice')->first();
     	return view('admin.dashboard', compact('cats', 'customers', 'items', 'showPrice'));
     }
+
+    public function searchName(Request $request)
+    {
+        return Item::Where('name', 'LIKE', "%$request->data%")->get();
+    }
+
+    public function searchCode(Request $request)
+    {
+        return Item::where('code', 'LIKE', "%$request->data%")->get();
+    }
 }

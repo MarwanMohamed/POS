@@ -172,7 +172,7 @@
         <form action="{{ route('login') }}" id="login-validation" class="col-md-4 col-sm-5 col-xs-11 col-lg-3 center-margin" method="POST">
 
             {{ csrf_field() }}
-            <h3 class="text-center pad25B font-green-alt text-transform-upr font-size-23">California International College <span class="opacity-80"></span></h3>
+            <h3 class="text-center pad25B font-green-alt text-transform-upr font-size-23">Sight Speed <span class="opacity-80"></span></h3>
             <div id="login-form" class="content-box bg-default">
                 <div class="content-box-wrapper pad20A">
                     <img class="mrg25B center-margin radius-all-100 display-block" src="{{asset('assets/image-resources/gravatar.jpg')}}" alt="">
